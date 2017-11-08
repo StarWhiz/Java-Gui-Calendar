@@ -13,6 +13,9 @@ import javax.swing.JList;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JSplitPane;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Font;
 
 public class View {
 
@@ -46,18 +49,42 @@ public class View {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 917, 802);
+		frame.setBounds(100, 100, 900, 900);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		JPanel mainCalendarPanel = new JPanel();
+		mainCalendarPanel.setBounds(15, 16, 400, 420);
+		frame.getContentPane().add(mainCalendarPanel);
+		mainCalendarPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		JPanel titlePanel = new JPanel();
+		mainCalendarPanel.add(titlePanel, BorderLayout.NORTH);
+		titlePanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel label = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
-		panel_1.add(label, BorderLayout.NORTH);
+		JPanel monthTitlePanel = new JPanel();
+		titlePanel.add(monthTitlePanel, BorderLayout.CENTER);
+		monthTitlePanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblMonth = DefaultComponentFactory.getInstance().createLabel("Month");
+		lblMonth.setFont(new Font("Tahoma", Font.BOLD, 16));
+		monthTitlePanel.add(lblMonth, BorderLayout.CENTER);
+		
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setFont(new Font("Tahoma", Font.BOLD, 16));
+		monthTitlePanel.add(lblYear, BorderLayout.EAST);
+		
+		JPanel arrowPanel = new JPanel();
+		titlePanel.add(arrowPanel, BorderLayout.EAST);
+		
+		JButton button = new JButton("<");
+		arrowPanel.add(button);
+		
+		JButton button_1 = new JButton(">");
+		arrowPanel.add(button_1);
+		
+		JPanel mainEventPanel = new JPanel();
+		mainEventPanel.setBounds(446, 16, 417, 812);
+		frame.getContentPane().add(mainEventPanel);
 	}
 }
