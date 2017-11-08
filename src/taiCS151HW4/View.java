@@ -18,6 +18,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 
 public class View {
+    private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
 
 	private JFrame frame;
 
@@ -40,6 +41,11 @@ public class View {
 	/**
 	 * Create the application.
 	 */
+	
+	public void start() {
+		frame.setVisible(true);
+	}
+	
 	public View() {
 		initialize();
 	}
@@ -49,9 +55,10 @@ public class View {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 900, 900);
+		frame.setBounds(100, 100, 900, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JPanel mainCalendarPanel = new JPanel();
 		mainCalendarPanel.setBounds(15, 16, 400, 420);
@@ -88,7 +95,7 @@ public class View {
 		daysPanel.setLayout(new GridLayout(7, 7, 0, 0));
 		
 		JPanel mainEventPanel = new JPanel();
-		mainEventPanel.setBounds(446, 16, 417, 812);
+		mainEventPanel.setBounds(446, 16, 417, 912);
 		frame.getContentPane().add(mainEventPanel);
 		mainEventPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -96,8 +103,10 @@ public class View {
 		mainEventPanel.add(timePanel, BorderLayout.WEST);
 		timePanel.setLayout(new GridLayout(24, 1, 0, 0));
 		
-		JLabel label = new JLabel("0:00   ");
-		timePanel.add(label);
+        for (int i = 0; i < DAY_HOURS; i++) {
+            timePanel.add(new JLabel(i + ":00"));
+            timePanel.add(new JLabel(" "));
+        }
 		
 		JPanel eventsPanel = new JPanel();
 		mainEventPanel.add(eventsPanel, BorderLayout.CENTER);
@@ -107,9 +116,11 @@ public class View {
 		eventTitlePanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblTime = new JLabel("Time   ");
+		lblTime.setFont(new Font("Tahoma", Font.BOLD, 16));
 		eventTitlePanel.add(lblTime, BorderLayout.WEST);
 		
 		JLabel lblEvents = new JLabel("Events");
+		lblEvents.setFont(new Font("Tahoma", Font.BOLD, 16));
 		eventTitlePanel.add(lblEvents, BorderLayout.CENTER);
 	}
 }
