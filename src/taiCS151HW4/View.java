@@ -83,8 +83,33 @@ public class View {
 		JButton button_1 = new JButton(">");
 		arrowPanel.add(button_1);
 		
+		JPanel daysPanel = new JPanel();
+		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
+		daysPanel.setLayout(new GridLayout(7, 7, 0, 0));
+		
 		JPanel mainEventPanel = new JPanel();
 		mainEventPanel.setBounds(446, 16, 417, 812);
 		frame.getContentPane().add(mainEventPanel);
+		mainEventPanel.setLayout(new BorderLayout(0, 0));
+		
+		JPanel timePanel = new JPanel();
+		mainEventPanel.add(timePanel, BorderLayout.WEST);
+		timePanel.setLayout(new GridLayout(24, 1, 0, 0));
+		
+		JLabel label = new JLabel("0:00   ");
+		timePanel.add(label);
+		
+		JPanel eventsPanel = new JPanel();
+		mainEventPanel.add(eventsPanel, BorderLayout.CENTER);
+		
+		JPanel eventTitlePanel = new JPanel();
+		mainEventPanel.add(eventTitlePanel, BorderLayout.NORTH);
+		eventTitlePanel.setLayout(new BorderLayout(0, 0));
+		
+		JLabel lblTime = new JLabel("Time   ");
+		eventTitlePanel.add(lblTime, BorderLayout.WEST);
+		
+		JLabel lblEvents = new JLabel("Events");
+		eventTitlePanel.add(lblEvents, BorderLayout.CENTER);
 	}
 }
