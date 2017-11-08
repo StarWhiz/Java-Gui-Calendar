@@ -99,10 +99,12 @@ public class View {
 		frame.getContentPane().add(mainEventPanel);
 		mainEventPanel.setLayout(new BorderLayout(0, 0));
 		
+		/**
+		 * This part lists all the times from 0:00 to 23:00
+		 */
 		JPanel timePanel = new JPanel();
 		mainEventPanel.add(timePanel, BorderLayout.WEST);
 		timePanel.setLayout(new GridLayout(24, 1, 0, 0));
-		
         for (int i = 0; i < DAY_HOURS; i++) {
             timePanel.add(new JLabel(i + ":00"));
             timePanel.add(new JLabel(" "));
