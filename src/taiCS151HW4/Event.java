@@ -1,9 +1,10 @@
 package taiCS151HW4;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class Event {
-	
+public class Event implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String title;
     private String date;
     private int startTimeHours;
