@@ -13,6 +13,16 @@ public class Event implements Serializable {
     private int endTimeMins;
     private GregorianCalendar calendar;
     
+	public Event(String title, String date, int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins) {
+		super();
+		this.title = title;
+		this.date = date;
+		this.startTimeHours = startTimeHours;
+		this.startTimeMins = startTimeMins;
+		this.endTimeHours = endTimeHours;
+		this.endTimeMins = endTimeMins;
+	}
+	
 	public String getTitle() {
 		return title;
 	}
