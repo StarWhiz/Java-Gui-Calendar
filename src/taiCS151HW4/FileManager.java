@@ -8,14 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-import hw4.Events;
-
-
 public class FileManager {
 	public class FileIO
 	{
 	    private static final boolean DEBUG = true;
-	    private final File calFile = new File("events.txt");
+	    private final File eventFile = new File("events.txt");
 	    private FileInputStream fileIn;
 	    private ObjectInputStream reader;
 	    private FileOutputStream fileOut;
@@ -38,13 +35,13 @@ public class FileManager {
 	        HashMap<Integer, Event> h = null;
 
 	        // New calendar if no save found
-	        if (!calFile.exists()) return new HashMap<Integer, Event>();
+	        if (!eventFile.exists()) return new HashMap<Integer, Event>();
 
 	        // Create file if it doesn't exist
-	        if (DEBUG) System.out.println("Reading in " + calFile);
+	        if (DEBUG) System.out.println("Reading in " + eventFile);
 	        try
 	        {
-	            fileIn = new FileInputStream(calFile);
+	            fileIn = new FileInputStream(eventFile);
 	            reader = new ObjectInputStream(fileIn);
 
 	            h = (HashMap<Integer, Event>) reader.readObject();
@@ -71,11 +68,11 @@ public class FileManager {
 	        String fail = "ERROR: FileIO-saveCalendar: ";
 
 	        // Create new empty file
-	        if (calFile.exists()) calFile.delete();
+	        if (eventFile.exists()) eventFile.delete();
 	        try
 	        {
-	            if (DEBUG) System.out.println("Creating " + calFile);
-	            calFile.createNewFile();
+	            if (DEBUG) System.out.println("Creating " + eventFile);
+	            eventFile.createNewFile();
 	        }
 	        catch (IOException e)
 	        {
@@ -84,10 +81,10 @@ public class FileManager {
 	        }
 
 	        // Write calendar to file
-	        if (DEBUG) System.out.println("Saving to " + calFile);
+	        if (DEBUG) System.out.println("Saving to " + eventFile);
 	        try
 	        {
-	            fileOut = new FileOutputStream(calFile);
+	            fileOut = new FileOutputStream(eventFile);
 	            writer = new ObjectOutputStream(fileOut);
 
 	            writer.writeObject(cal);

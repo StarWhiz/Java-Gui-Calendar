@@ -16,11 +16,14 @@ import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
+import javax.swing.JTextPane;
 
 public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
 
 	private JFrame frame;
+	private JTextField txtTimeStart;
+	private JTextField txtTimeEnd;
 
 	/**
 	 * Launch the application.
@@ -124,5 +127,30 @@ public class View {
 		JLabel lblEvents = new JLabel("Events");
 		lblEvents.setFont(new Font("Tahoma", Font.BOLD, 16));
 		eventTitlePanel.add(lblEvents, BorderLayout.CENTER);
+		
+		JPanel eventCreationPanel = new JPanel();
+		eventCreationPanel.setBounds(25, 466, 390, 462);
+		frame.getContentPane().add(eventCreationPanel);
+		eventCreationPanel.setLayout(new BorderLayout(0, 0));
+		
+		JTextPane textPane = new JTextPane();
+		eventCreationPanel.add(textPane, BorderLayout.CENTER);
+		
+		JPanel savebar = new JPanel();
+		eventCreationPanel.add(savebar, BorderLayout.NORTH);
+		savebar.setLayout(new GridLayout(1, 0, 30, 0));
+		
+		txtTimeStart = new JTextField();
+		txtTimeStart.setText("Time Start");
+		savebar.add(txtTimeStart);
+		txtTimeStart.setColumns(10);
+		
+		txtTimeEnd = new JTextField();
+		txtTimeEnd.setText("Time End");
+		savebar.add(txtTimeEnd);
+		txtTimeEnd.setColumns(10);
+		
+		JButton btnSave = new JButton("Save");
+		savebar.add(btnSave);
 	}
 }
