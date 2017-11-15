@@ -44,8 +44,7 @@ public class EventManager {
             try
             {
                 fileIn = new FileInputStream(eventFile);
-                reader = new ObjectInputStream(fileIn);
-                
+                reader = new ObjectInputStream(fileIn);      
                 eventsTM = (TreeMap<String, Event>) reader.readObject();
                 reader.close();
                 fileIn.close();
@@ -74,7 +73,6 @@ public class EventManager {
             System.out.println("There was an error in deleting: " + e);
             e.printStackTrace();
         }
-
         // Now write a new file
         if (DEBUG) System.out.println("Saving to a file called: " + eventFile);
         try
@@ -91,6 +89,7 @@ public class EventManager {
             e.printStackTrace();
         }
 	}
+	
 	public void displayEventBasedOnDate (String date) {
 		String theEventTitle = eventsTM.get(date).getTitle();
 		System.out.println(theEventTitle);
