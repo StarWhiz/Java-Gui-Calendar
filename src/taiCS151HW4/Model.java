@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 
 public class Model {
     public static String[] arrayMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    public static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
     
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
@@ -31,7 +31,9 @@ public class Model {
 		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
 		String currentMonth= new SimpleDateFormat("MMM").format(c.getTime());
 		int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
+		
 		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
 		
 		
 
@@ -47,6 +49,12 @@ public class Model {
 		//System.out.println("This is total days of the month: " + totalDaysInMonth);
 	}
 	public int getTotalDaysOfCurrentMonth () {
-		return (c.getActualMaximum(Calendar.DAY_OF_MONTH)) + 1;
+
+		return (c.getActualMaximum(Calendar.DAY_OF_MONTH));
+	}
+	public int getFirstDayOfWeekOfCurrentMonth () {
+		c.set(Calendar.DAY_OF_MONTH, 1);
+		System.out.println(c.get(Calendar.DAY_OF_WEEK));
+		return (c.get(Calendar.DAY_OF_WEEK));
 	}
 }

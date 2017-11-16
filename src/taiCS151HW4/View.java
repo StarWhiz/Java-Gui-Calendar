@@ -28,6 +28,7 @@ public class View {
 	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
 	private Model model = new Model();
+    public static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
 	/**
 	 * Launch the application.
@@ -97,23 +98,7 @@ public class View {
 		JButton button_1 = new JButton(">");
 		arrowPanel.add(button_1);
 		
-		//This will contain 49 buttons for days
-		JPanel daysPanel = new JPanel();
-		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
-		daysPanel.setLayout(new GridLayout(0,7));
-		
-		
-		for (int i = 1; i < model.getTotalDaysOfCurrentMonth(); i++ ) {
-			JButton temp = new JButton(i+"");
-			aListDayButtons.add(temp);
-			System.out.println(aListDayButtons.size());
-		}
-		
-		for (int i = 0; i < 49; i++ ) {
-			daysPanel.add(aListDayButtons.get(i));
-			//daysPanel.add(new JButton());
-
-		}
+		printCalendar(mainCalendarPanel); //Fills Calendar
 		
 		JPanel mainEventPanel = new JPanel();
 		mainEventPanel.setBounds(446, 16, 417, 912);
@@ -124,11 +109,12 @@ public class View {
 		 * This part lists all the times from 0:00 to 23:00
 		 */
 		JPanel timePanel = new JPanel();
+		
 		mainEventPanel.add(timePanel, BorderLayout.WEST);
+		
 		timePanel.setLayout(new GridLayout(24, 1, 0, 0));
         for (int i = 0; i < DAY_HOURS; i++) {
             timePanel.add(new JLabel(i + ":00"));
-            timePanel.add(new JLabel(" "));
         }
 		
 		JPanel eventsPanel = new JPanel();
@@ -170,5 +156,36 @@ public class View {
 		
 		JButton btnSave = new JButton("Save");
 		savebar.add(btnSave);
+	}
+	
+	public void printCalendar(JPanel mainCalendarPanel) {
+		//This panel will contain the days...
+		JPanel daysPanel = new JPanel();
+		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
+		daysPanel.setLayout(new GridLayout(0,7));
+		
+		//Prints Sun-Sat
+		for (int i = 0; i < arrayDays.length ; i++) {
+			JLabel temp = new JLabel();
+			temp.setText(arrayDays[i]);
+			temp.setHorizontalAlignment(JLabel.CENTER);
+			daysPanel.add(temp);
+		}
+		//Prints empty Buttons
+		for (int i = 1; i < model.getFirstDayOfWeekOfCurrentMonth(); i++ ) {
+			JButton temp = new JButton();
+			temp.setOpaque(false);
+			temp.setContentAreaFilled(false);
+			temp.setBorderPainted(false);
+			daysPanel.add(temp);
+		}
+		//Prints days...
+		for (int i = 1; i <= model.getTotalDaysOfCurrentMonth(); i++ ) {
+			JButton temp = new JButton(i+"");
+			aListDayButtons.add(temp);
+		}
+		for (int i = 0; i < aListDayButtons.size(); i++ ) {
+			daysPanel.add(aListDayButtons.get(i));
+		}
 	}
 }
