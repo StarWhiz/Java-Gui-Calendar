@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JList;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
@@ -24,6 +26,8 @@ public class View {
 	private JFrame frame;
 	private JTextField txtTimeStart;
 	private JTextField txtTimeEnd;
+	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
+	private Model model = new Model();
 
 	/**
 	 * Launch the application.
@@ -93,9 +97,23 @@ public class View {
 		JButton button_1 = new JButton(">");
 		arrowPanel.add(button_1);
 		
+		//This will contain 49 buttons for days
 		JPanel daysPanel = new JPanel();
 		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
-		daysPanel.setLayout(new GridLayout(7, 7, 0, 0));
+		daysPanel.setLayout(new GridLayout(0,7));
+		
+		
+		for (int i = 1; i < model.getTotalDaysOfCurrentMonth(); i++ ) {
+			JButton temp = new JButton(i+"");
+			aListDayButtons.add(temp);
+			System.out.println(aListDayButtons.size());
+		}
+		
+		for (int i = 0; i < 49; i++ ) {
+			daysPanel.add(aListDayButtons.get(i));
+			//daysPanel.add(new JButton());
+
+		}
 		
 		JPanel mainEventPanel = new JPanel();
 		mainEventPanel.setBounds(446, 16, 417, 912);

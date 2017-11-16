@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 
 public class Model {
     public static String[] arrayMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    public static String[] arrayDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    public static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
@@ -30,16 +30,23 @@ public class Model {
 		
 		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
 		String currentMonth= new SimpleDateFormat("MMM").format(c.getTime());
-	
-		System.out.println("This is the current Month: " + currentMonth);
-		System.out.println("This is the current Year: " + currentYear);
-
-		
 		int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
-		System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);
+		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+		
 
-		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH); 
-		System.out.println("This is total days of the month: " + totalDaysInMonth);
+	
 
+
+	}
+	public void initializeCalendar() {
+ 
+		//System.out.println("This is the current Month: " + currentMonth);
+		//System.out.println("This is the current Year: " + currentYear);
+		//System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);
+		//System.out.println("This is total days of the month: " + totalDaysInMonth);
+	}
+	public int getTotalDaysOfCurrentMonth () {
+		return (c.getActualMaximum(Calendar.DAY_OF_MONTH)) + 1;
 	}
 }

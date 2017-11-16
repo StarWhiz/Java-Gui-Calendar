@@ -6,6 +6,6 @@ public class MainCalendar {
 		View appInit = new View ();
 		appInit.start();
 		
-		Model model = new Model();
+
 	}
 }
