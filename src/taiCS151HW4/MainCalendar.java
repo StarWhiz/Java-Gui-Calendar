@@ -5,6 +5,7 @@ public class MainCalendar {
 	public static void main(String[] args) {
 		View appInit = new View ();
 		appInit.start();
-
+		
+		Model model = new Model();
 	}
 }

@@ -107,9 +107,14 @@ public class EventManager {
 	}
 	
 	public void displayEventBasedOnDate (String date) {
-		ArrayList<Event> eventList = eventsDS.get(date);
-		for (int i = 0; i < eventList.size(); i++ ) {
-			System.out.println(eventList.get(i).getTitle()); //displays all eventTitles for that date
+		if (eventsDS.get(date) != null){
+			ArrayList<Event> eventList = eventsDS.get(date);
+			for (int i = 0; i < eventList.size(); i++ ) {
+				System.out.println(eventList.get(i).getTitle()); //displays all eventTitles for that date
+			}
+		}
+		else {
+			System.out.println("Events do not exist on this day.");
 		}
 	}
 }

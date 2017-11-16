@@ -21,12 +21,12 @@ public class Model {
 		eventManager = new EventManager();
 		c = new GregorianCalendar();
 		
-		eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
-		eventManager.createEvent("Tai's third event", "11/14/17", 17, 30, 23, 59);
-		eventManager.saveEvents();
+		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
+		//eventManager.createEvent("Tai's third event", "11/15/17", 17, 30, 23, 59);
+		//eventManager.saveEvents();
 		
 		eventManager.loadEvents();
-		eventManager.displayEventBasedOnDate("11/14/17");
+		eventManager.displayEventBasedOnDate("11/13/17");
 		
 		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
 		String currentMonth= new SimpleDateFormat("MMM").format(c.getTime());
