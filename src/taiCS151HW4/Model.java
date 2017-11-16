@@ -11,8 +11,11 @@ public class Model {
     public static String[] arrayMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public static String[] arrayDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     
+    
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
+	
+	
 	private ArrayList<ChangeListener> aListOfChangeListeners;
 
 	

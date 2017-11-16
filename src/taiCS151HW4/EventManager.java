@@ -1,5 +1,7 @@
 package taiCS151HW4;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import java.io.File;
@@ -10,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class EventManager {
-	public TreeMap <String, Event> eventsTM;
+	private HashMap <String, ArrayList<Event>> eventsDS;
     private final File eventFile = new File("events.txt");
     private FileInputStream fileIn;
     private ObjectInputStream reader;
@@ -19,20 +21,34 @@ public class EventManager {
     private static final boolean DEBUG = true;
 	
 	EventManager (){
-		eventsTM = new TreeMap <String, Event>();
+		eventsDS = new HashMap <String, ArrayList<Event>>();
 	}
 
 	public void createEvent(String title, String date, int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins ) {
+		ArrayList<Event> tempEventList = new ArrayList<Event> ();
 		Event e = new Event(title, date, startTimeHours, startTimeMins, endTimeHours, endTimeMins);
-		eventsTM.put(date, e);
 		
+		if(eventsDS.get(date) != null) { //check to see if an event for this date exists in our DS
+			tempEventList = eventsDS.get(date); // if it does exist copy array list.. then add the event to the arrayList
+												// otherwise just add the event to the arrayList
+		}
+		tempEventList.add(e); 
+		eventsDS.put(date, tempEventList);
 	}
-	public void deleteEvent(String dateOfEventToDelete) {
-		eventsTM.remove(dateOfEventToDelete);
+	
+	public void deleteEvent(Event e) {
+		String tempDate = e.getDate();
+		ArrayList<Event> eventList = eventsDS.get(tempDate);
+		for (int i = 0; i < eventList.size(); i++ ) {
+			if (e == eventList.get(i)) {
+				eventList.remove(i);
+			}
+		}
 	}
+	
 	public void loadEvents() {
 		System.out.println("Loading Data From events.txt file....");
-        eventsTM = null;
+        eventsDS = null;
         
         // New calendar if no save found
         if (!eventFile.isFile()) {
@@ -45,7 +61,7 @@ public class EventManager {
             {
                 fileIn = new FileInputStream(eventFile);
                 reader = new ObjectInputStream(fileIn);      
-                eventsTM = (TreeMap<String, Event>) reader.readObject();
+                eventsDS = (HashMap<String, ArrayList<Event>>) reader.readObject();
                 reader.close();
                 fileIn.close();
             }
@@ -79,7 +95,7 @@ public class EventManager {
         {
             fileOut = new FileOutputStream(eventFile);
             writer = new ObjectOutputStream(fileOut);
-            writer.writeObject(eventsTM);
+            writer.writeObject(eventsDS);
             writer.close();
             fileOut.close();
         }
@@ -91,7 +107,7 @@ public class EventManager {
 	}
 	
 	public void displayEventBasedOnDate (String date) {
-		String theEventTitle = eventsTM.get(date).getTitle();
+		String theEventTitle = eventsDS.get(date).getTitle();
 		System.out.println(theEventTitle);
 	}
 	
