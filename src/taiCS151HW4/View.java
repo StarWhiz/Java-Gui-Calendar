@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JList;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -29,6 +31,8 @@ public class View {
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
 	private Model model = new Model();
     public static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+  
+    JButton btnQuit;
 
 	/**
 	 * Launch the application.
@@ -92,11 +96,20 @@ public class View {
 		JPanel arrowPanel = new JPanel();
 		titlePanel.add(arrowPanel, BorderLayout.EAST);
 		
-		JButton button = new JButton("<");
-		arrowPanel.add(button);
+		/**
+		 * Previous button here
+		 */
+		JButton prevButton = new JButton("<");
+		arrowPanel.add(prevButton);
+		prevButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.setCurrentMonth(month);
+			}
+		});
 		
-		JButton button_1 = new JButton(">");
-		arrowPanel.add(button_1);
+		JButton nextButton = new JButton(">");
+		arrowPanel.add(nextButton);
 		
 		printCalendar(mainCalendarPanel); //Fills Calendar
 		
@@ -154,8 +167,19 @@ public class View {
 		savebar.add(txtTimeEnd);
 		txtTimeEnd.setColumns(10);
 		
-		JButton btnSave = new JButton("Save");
-		savebar.add(btnSave);
+		/**
+		 * Quit Button Here
+		 */
+		btnQuit = new JButton("Quit & Save");
+		savebar.add(btnQuit);
+		btnQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.saveNquit();
+				System.exit(0);
+			}
+		});
+		
 	}
 	
 	public void printCalendar(JPanel mainCalendarPanel) {
@@ -188,4 +212,7 @@ public class View {
 			daysPanel.add(aListDayButtons.get(i));
 		}
 	}
+	
+
+	
 }
