@@ -11,11 +11,8 @@ public class Model {
     public static String[] arrayMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     public static String[] arrayDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     
-    
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
-	
-	
 	private ArrayList<ChangeListener> aListOfChangeListeners;
 
 	
@@ -24,8 +21,10 @@ public class Model {
 		eventManager = new EventManager();
 		c = new GregorianCalendar();
 		
+		eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
+		eventManager.createEvent("Tai's third event", "11/14/17", 17, 30, 23, 59);
+		eventManager.saveEvents();
 		
-		//eventManager.createEvent("Tai's first event", "11/14/17", 17, 30, 23, 59);
 		eventManager.loadEvents();
 		eventManager.displayEventBasedOnDate("11/14/17");
 		

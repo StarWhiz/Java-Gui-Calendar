@@ -107,8 +107,9 @@ public class EventManager {
 	}
 	
 	public void displayEventBasedOnDate (String date) {
-		String theEventTitle = eventsDS.get(date).getTitle();
-		System.out.println(theEventTitle);
+		ArrayList<Event> eventList = eventsDS.get(date);
+		for (int i = 0; i < eventList.size(); i++ ) {
+			System.out.println(eventList.get(i).getTitle()); //displays all eventTitles for that date
+		}
 	}
-	
 }
