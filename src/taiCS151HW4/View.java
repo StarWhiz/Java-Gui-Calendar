@@ -93,6 +93,11 @@ public class View {
 		titlePanel.add(monthTitlePanel, BorderLayout.CENTER);
 		monthTitlePanel.setLayout(new BorderLayout(0, 0));
 		
+		JPanel mainEventPanel = new JPanel();
+		mainEventPanel.setBounds(446, 16, 417, 912);
+		frame.getContentPane().add(mainEventPanel);
+		mainEventPanel.setLayout(new BorderLayout(0, 0));
+		
 		/**
 		 * Month & Year Labels
 		 */
@@ -112,63 +117,18 @@ public class View {
 		 */
 		prevButton = new JButton("<");
 		arrowPanel.add(prevButton);
-		prevButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int selectedDay = model.getDay();
+		addPrevButtonListener(prevButton);
 
-				
-				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
-				
-				System.out.println("this is current day b4 button presed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
-				
-				selectedDay--;
-				selectedIndex--;
-				model.setDay(selectedDay);
-				System.out.println("this is selected day after button pressed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
-			}
-		});
 		/**
 		 * Next Button
 		 */
 		JButton nextButton = new JButton(">");
 		arrowPanel.add(nextButton);
-		nextButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int selectedDay = model.getDay();
-				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
-				
-				System.out.println("this is current day b4 button presed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
-				if (selectedDay == model.getLastDayOfMonth()) {
-					selectedIndex = 0;
-					model.setDay(1);
-					model.setMonth(model.getMonthInt());
-					System.out.println("this damn current month" + model.getMonthInt());
-					lblMonth.setText(model.getMonth());
-					lblYear.setText(model.getYear());
-				}
-				else {
-					selectedDay++;
-					selectedIndex++;
-					model.setDay(selectedDay);
-				}
-	
-				System.out.println("this is selected day after button pressed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
-			}
-		});
+		addNextButtonListener(nextButton);
 		
 		printCalendar(mainCalendarPanel); //Fills Calendar
 		
-		JPanel mainEventPanel = new JPanel();
-		mainEventPanel.setBounds(446, 16, 417, 912);
-		frame.getContentPane().add(mainEventPanel);
-		mainEventPanel.setLayout(new BorderLayout(0, 0));
-		
+
 		/**
 		 * This part lists all the times from 0:00 to 23:00
 		 */
@@ -196,6 +156,9 @@ public class View {
 		lblEvents.setFont(new Font("Tahoma", Font.BOLD, 16));
 		eventTitlePanel.add(lblEvents, BorderLayout.CENTER);
 		
+		/**
+		 * Event Creation Here
+		 */
 		JPanel eventCreationPanel = new JPanel();
 		eventCreationPanel.setBounds(25, 466, 390, 462);
 		frame.getContentPane().add(eventCreationPanel);
@@ -270,9 +233,58 @@ public class View {
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 	}
+	
+	/**
+	 * Controller
+	 */
 
-	public void addPrevButtonListener(ActionListener a) {
+	public void addPrevButtonListener(JButton prevButton) {
+		prevButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedDay = model.getDay();
 
+				
+				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				
+				System.out.println("this is current day b4 button presed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
+				
+				selectedDay--;
+				selectedIndex--;
+				model.setDay(selectedDay);
+				System.out.println("this is selected day after button pressed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+			}
+		});
+
+	}
+	public void addNextButtonListener(JButton nextButton) {
+		nextButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int selectedDay = model.getDay();
+				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				
+				System.out.println("this is current day b4 button presed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
+				if (selectedDay == model.getLastDayOfMonth()) {
+					selectedIndex = 0;
+					model.setDay(1);
+					model.setMonth(model.getMonthInt());
+					System.out.println("this damn current month" + model.getMonthInt());
+					lblMonth.setText(model.getMonth());
+					lblYear.setText(model.getYear());
+				}
+				else {
+					selectedDay++;
+					selectedIndex++;
+					model.setDay(selectedDay);
+				}
+				System.out.println("this is selected day after button pressed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+			}
+		});
 	}
 
 	
