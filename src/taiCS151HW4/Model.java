@@ -43,57 +43,106 @@ public class Model {
 		
 		eventManager.loadEvents();
 		eventManager.displayEventBasedOnDate("11/14/17");
-		initializeCalendar();
-
-
 	}
-	public void initializeCalendar() {
-		//int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
-		//int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-		//System.out.println("This is the current Month: " + currentMonth);
-		//System.out.println("This is the current Year: " + currentYear);
-		//System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);
-		//System.out.println("This is total days of the month: " + totalDaysInMonth);
-	}
-	
-	// if arrow button is pressed do this...
+
+	/**
+	 * This function changes the selected the month in GregorianCalendar. Useful for advancing
+	 * or going back to a previous month.
+	 * 
+	 * @param month
+	 */
 	public void setCurrentMonth(int month) {
 		c.set(Calendar.MONTH, month);
 	}
 	
+	/**
+	 * This function returns the total # of days of the selected month in GregorianCalendar
+	 * 
+	 * @return int maxNumberOfDaysOfSelectedMonth
+	 */
 	public int getTotalDaysOfCurrentMonth () {
 		return (c.getActualMaximum(Calendar.DAY_OF_MONTH));
 	}
+	
+	/**
+	 * This function returns the first day of the selected month in GregorianCalendar
+	 * 
+	 * @return int firstDayOfSelectedMonth
+	 */
 	public int getFirstDayOfWeekOfCurrentMonth () {
 		c.set(Calendar.DAY_OF_MONTH, 1);
 		return (c.get(Calendar.DAY_OF_WEEK));
 	}
+	
+	/**
+	 * This function returns the month as a string.
+	 * 
+	 * @return String currentMonth
+	 */
 	public String getMonth() {
 		String currentMonth = new SimpleDateFormat("MMMM").format(c.getTime());
 		return currentMonth;
 	}
+	/**
+	 * This function returns the year as a string.
+	 * 
+	 * @return String currentYear
+	 */
 	public String getYear() {
 		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
 		return currentYear;
 	}
+	/**
+	 * This function returns the last day of the selected month in GregorianCalendar
+	 * 
+	 * @return int lastDayOfMonth
+	 */
 	public int getLastDayOfMonth() {
 		return(c.getActualMaximum(Calendar.DAY_OF_MONTH));
 	}
+	
+	/**
+	 * This function returns the current day of the selected month in GregorianCalendar
+	 * 
+	 * @return int selectedDay
+	 */
 	public int getDay() {
 		return selectedDay;
 	}
+	
+	/**
+	 * This function gets the index for the ArrayList<JButton> in View.
+	 * 
+	 * @return int selectedIndex
+	 */
 	public int getSelectedDayIndex(){
 		selectedIndex = this.getDay() - 1;
 		return selectedIndex;
 	}
+	
+	/**
+	 * This function sets the day of the selected month in GregorianCalendar. It also updates the view
+	 * and highlights the new day that was set.
+	 * 
+	 * @param day
+	 */
 	public void setDay(int day) {
 		c.set(Calendar.DATE, day);
 		selectedDay = c.get(Calendar.DATE);
 		view.highlightDay();
 	}
+	
+	/**
+	 * This function returns the month of the selected month in GregorianCalendar as an integer. Because
+	 * January is = to 0 in the index I added a +1.
+	 * 
+	 * @return int selectedMonth+1
+	 */
 	public int getMonthInt() {
 		return selectedMonth+1;
 	}
+	
+	
 	public void setMonth(int month) {
 		c.set(Calendar.MONTH, month);
 	}
