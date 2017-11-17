@@ -243,9 +243,7 @@ public class View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedDay = model.getDay();
-
-				
-				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				int selectedIndex = model.getSelectedDayIndex(); //day 1 is index 0 day 16 is index15, 15 is index 14
 				
 				System.out.println("this is current day b4 button presed: " + selectedDay);
 				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
@@ -264,7 +262,7 @@ public class View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int selectedDay = model.getDay();
-				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				int selectedIndex = model.getSelectedDayIndex(); //day 1 is index 0 day 16 is index15, 15 is index 14
 				
 				System.out.println("this is current day b4 button presed: " + selectedDay);
 				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));

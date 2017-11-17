@@ -13,7 +13,10 @@ public class Model {
 	GregorianCalendar c; //For capturing current day
 	
 	int currentDay;
+	int selectedDay;
+	int selectedIndex;
 	int currentMonth;
+	String currentDate;
 	
 	private ArrayList<ChangeListener> aListOfChangeListeners;
 
@@ -23,9 +26,9 @@ public class Model {
 		eventManager = new EventManager();
 		c = new GregorianCalendar();
 		c = (GregorianCalendar) GregorianCalendar.getInstance();
-		currentDay = c.get(Calendar.DATE);
+		selectedDay = c.get(Calendar.DATE);
 		currentMonth = c.get(Calendar.MONTH);
-		System.out.println(currentDay);
+		System.out.println(selectedDay);
 		
 		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
 		//eventManager.createEvent("Tai's third event", "11/15/17", 17, 30, 23, 59);
@@ -33,14 +36,18 @@ public class Model {
 		
 		eventManager.loadEvents();
 		eventManager.displayEventBasedOnDate("11/14/17");
+		
+		initializeCalendar();
 
 
 	}
 	public void initializeCalendar() {
-		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
-		String currentMonth= new SimpleDateFormat("MMM").format(c.getTime());
+
 		int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
 		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
+		
+		System.out.println(currentDate);
+		System.out.println("hello?");
 		//System.out.println("This is the current Month: " + currentMonth);
 		//System.out.println("This is the current Year: " + currentYear);
 		//System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);
@@ -71,11 +78,15 @@ public class Model {
 		return(c.getActualMaximum(Calendar.DAY_OF_MONTH));
 	}
 	public int getDay() {
-		return currentDay;
+		return selectedDay;
+	}
+	public int getSelectedDayIndex(){
+		selectedIndex = this.getDay() - 1;
+		return selectedIndex;
 	}
 	public void setDay(int day) {
 		c.set(Calendar.DATE, day);
-		currentDay = c.get(Calendar.DATE);
+		selectedDay = c.get(Calendar.DATE);
 		//System.out.println(c.get(Calendar.DATE));
 	}
 	public int getMonthInt() {
@@ -83,6 +94,10 @@ public class Model {
 	}
 	public void setMonth(int month) {
 		c.set(Calendar.MONTH, month);
+	}
+	public String getMMDDYY() {
+		currentDate = new SimpleDateFormat("MM/dd/yy").format(c.getTime());
+		return currentDate;
 	}
 	public void saveNquit() {
 		eventManager.saveEvents();
