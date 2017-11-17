@@ -180,6 +180,9 @@ public class View {
 		
 		JLabel lblDay = new JLabel("Day");
 		currentDaySelected.add(lblDay);
+		lblDay.setText(model.getMMDDYY());
+		System.out.println(model.getMMDDYY());
+		//System.out.println(model.getDay());
 
 		txtTimeStart = new JTextField();
 		txtTimeStart.setText("Time Start");

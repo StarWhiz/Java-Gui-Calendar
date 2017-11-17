@@ -94,8 +94,11 @@ public class Model {
 		c.set(Calendar.MONTH, month);
 	}
 	public String getMMDDYY() {
-		currentDate = new SimpleDateFormat("MM/dd/yy").format(c.getTime());
-		return currentDate;
+		int currentDateDay = selectedDay;
+		String currentDateMonth = new SimpleDateFormat("MM").format(c.getTime());
+		String currentDateYear = new SimpleDateFormat("YYYY").format(c.getTime());
+		String mmDDYY = currentDateMonth + "/" + currentDateDay + "/" + currentDateYear;
+		return mmDDYY;
 	}
 	public void saveNquit() {
 		eventManager.saveEvents();
