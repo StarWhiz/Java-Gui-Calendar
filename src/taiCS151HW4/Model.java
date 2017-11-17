@@ -114,52 +114,34 @@ public class Model {
 	public void advanceNextDay() {
 		view.removeViewSelectedDay();
 		if (selectedDay == this.getLastDayOfMonth()) { 
-			selectedMonth++;
-			this.setMonth(selectedMonth);
-			///////////////////////////////
-			if (selectedMonth == 12) { // December
-				selectedYear++;
-				this.setYear(selectedYear);
-	
-				selectedDay = 1;
-				this.setDay(selectedDay);
-			}///////////////////////////////
+			c.add(Calendar.MONTH, 1);
 			selectedDay = 1;
 			this.setDay(selectedDay);
-			view.clearCalendarDays();
-			view.updateViewCalendar();
-		}
+		} 
 		else {
 			selectedDay++;
 			selectedIndex++;
 			this.setDay(selectedDay);
 		}
+		view.clearCalendarDays();
+		view.updateViewCalendar();
 		view.updateViewSelecteDay();
 	}
 	public void retreatPrevDay() {
 		view.removeViewSelectedDay();
 		if (selectedDay == 1) { 
-			selectedMonth--;
-			this.setMonth(selectedMonth); 
-			///////////////////////////////			
-			if (selectedMonth == 0) { // January
-				selectedYear--;
-				this.setYear(selectedYear);
-				selectedMonth = 11; // December
-				this.setMonth(selectedMonth);
-				selectedDay = this.getLastDayOfMonth(); //31
-				this.setDay(selectedDay);
-			}///////////////////////////////
-			selectedDay = this.getLastDayOfMonth(); 
-			this.setDay(selectedDay);
-			view.clearCalendarDays();
-			view.updateViewCalendar();
+			c.add(Calendar.MONTH, -1);
+			selectedDay = this.getLastDayOfMonth();
 		}
 		else {
 			selectedDay--;
 			selectedIndex--;
 			this.setDay(selectedDay);
 		}
+		view.clearCalendarDays();
+		view.updateViewCalendar();
 		view.updateViewSelecteDay();
 	}
+	
+
 }
