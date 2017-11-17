@@ -13,6 +13,7 @@ public class Model {
 	GregorianCalendar c; //For capturing current day
 	
 	int currentDay;
+	int currentMonth;
 	
 	private ArrayList<ChangeListener> aListOfChangeListeners;
 
@@ -23,6 +24,7 @@ public class Model {
 		c = new GregorianCalendar();
 		c = (GregorianCalendar) GregorianCalendar.getInstance();
 		currentDay = c.get(Calendar.DATE);
+		currentMonth = c.get(Calendar.MONTH);
 		System.out.println(currentDay);
 		
 		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
@@ -58,12 +60,15 @@ public class Model {
 		return (c.get(Calendar.DAY_OF_WEEK));
 	}
 	public String getMonth() {
-		String currentMonth= new SimpleDateFormat("MMMM").format(c.getTime());
+		String currentMonth = new SimpleDateFormat("MMMM").format(c.getTime());
 		return currentMonth;
 	}
 	public String getYear() {
 		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
 		return currentYear;
+	}
+	public int getLastDayOfMonth() {
+		return(c.getActualMaximum(Calendar.DAY_OF_MONTH));
 	}
 	public int getDay() {
 		return currentDay;
@@ -72,6 +77,12 @@ public class Model {
 		c.set(Calendar.DATE, day);
 		currentDay = c.get(Calendar.DATE);
 		//System.out.println(c.get(Calendar.DATE));
+	}
+	public int getMonthInt() {
+		return currentMonth+1;
+	}
+	public void setMonth(int month) {
+		c.set(Calendar.MONTH, month);
 	}
 	public void saveNquit() {
 		eventManager.saveEvents();
