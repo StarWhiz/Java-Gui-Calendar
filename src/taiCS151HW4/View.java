@@ -39,6 +39,7 @@ public class View {
 	private JButton nextButton;
     private JButton btnQuit;
 	
+    private JPanel daysPanel;
 	private JTextField txtTimeStart;
 	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -128,9 +129,13 @@ public class View {
 		nextButton = new JButton(">");
 		arrowPanel.add(nextButton);
 		addNextButtonListener(nextButton);
-		
-		printCalendar(mainCalendarPanel); //Fills Calendar
-		
+		/**
+		 * Printing initial calendar
+		 */
+		daysPanel = new JPanel();
+		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
+		daysPanel.setLayout(new GridLayout(0,7));
+		updateViewCalendar();
 
 		/**
 		 * This part lists all the times from 0:00 to 23:00
@@ -209,44 +214,6 @@ public class View {
 		
 	}
 	
-	public void printCalendar(JPanel mainCalendarPanel) {
-		//This panel will contain the days...
-		JPanel daysPanel = new JPanel();
-		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
-		daysPanel.setLayout(new GridLayout(0,7));
-		
-		//Prints Sun-Sat
-		for (int i = 0; i < arrayDays.length ; i++) {
-			JLabel temp = new JLabel();
-			temp.setText(arrayDays[i]);
-			temp.setHorizontalAlignment(JLabel.CENTER);
-			daysPanel.add(temp);
-		}
-		//Prints empty Buttons
-		for (int i = 1; i < model.getFirstDayOfWeekOfCurrentMonth(); i++ ) {
-			JButton temp = new JButton();
-			temp.setOpaque(false);
-			temp.setContentAreaFilled(false);
-			temp.setBorderPainted(false);
-			daysPanel.add(temp);
-		}
-		//Prints days...
-		for (int i = 1; i <= model.getTotalDaysOfCurrentMonth(); i++ ) {
-			JButton temp = new JButton(i+"");
-			aListDayButtons.add(temp);
-
-		}
-		for (int i = 0; i < aListDayButtons.size(); i++ ) {
-			aListDayButtons.get(i).setBackground(Color.black);
-			aListDayButtons.get(i).setBackground(Color.white);
-			aListDayButtons.get(i).setBorder(BorderFactory.createLineBorder(Color.black, 1));
-			daysPanel.add(aListDayButtons.get(i));
-		}
-		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
-		lblMonth.setText(model.getMonth());
-		lblYear.setText(model.getYear());
-	}
-	
 	/**
 	 * Controller
 	 */
@@ -287,5 +254,40 @@ public class View {
 	public void removeViewSelectedDay() {
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	
+	public void updateViewCalendar() {
+		//Prints Sun-Sat
+		for (int i = 0; i < arrayDays.length ; i++) {
+			JLabel temp = new JLabel();
+			temp.setText(arrayDays[i]);
+			temp.setHorizontalAlignment(JLabel.CENTER);
+			daysPanel.add(temp);
+		}
+		//Prints empty Buttons
+		for (int i = 1; i < model.getFirstDayOfWeekOfCurrentMonth(); i++ ) {
+			JButton temp = new JButton();
+			temp.setOpaque(false);
+			temp.setContentAreaFilled(false);
+			temp.setBorderPainted(false);
+			daysPanel.add(temp);
+		}
+		//Prints days...
+		for (int i = 1; i <= model.getTotalDaysOfCurrentMonth(); i++ ) {
+			JButton temp = new JButton(i+"");
+			aListDayButtons.add(temp);
+
+		}
+		for (int i = 0; i < aListDayButtons.size(); i++ ) {
+			aListDayButtons.get(i).setBackground(Color.black);
+			aListDayButtons.get(i).setBackground(Color.white);
+			aListDayButtons.get(i).setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			daysPanel.add(aListDayButtons.get(i));
+		}
+		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+	}
+	public void clearCalendarDays() {
+		daysPanel.removeAll();
+		daysPanel.revalidate();
+		daysPanel.repaint();
+		aListDayButtons.removeAll(aListDayButtons);
+	}
 }

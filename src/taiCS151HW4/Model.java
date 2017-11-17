@@ -117,12 +117,14 @@ public class Model {
 			System.out.println("this damn current month after " + selectedMonth);
 			this.setMonth(selectedMonth);
 			this.setDay(1);
+			view.clearCalendarDays();
+			view.updateViewCalendar();
 
 		}
 		else if (selectedDay == 1){
 			this.setMonth(selectedMonth -1);
 			selectedDay = this.getLastDayOfMonth();
-			
+			view.updateViewCalendar();
 		}
 		else {
 			selectedDay++;
