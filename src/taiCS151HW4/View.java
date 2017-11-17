@@ -25,22 +25,27 @@ import java.awt.GridBagConstraints;
 import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeListener;
 
 public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
-
+    public final static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+    
 	private JFrame frame;
 	private JLabel lblMonth;
 	private JLabel lblYear;
-	private JButton prevButton ;
+	private JLabel lblDate;
+	private JButton prevButton;
+	private JButton nextButton;
+    private JButton btnQuit;
 	
 	private JTextField txtTimeStart;
 	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
-	private Model model = new Model();
-    public static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-  
-    JButton btnQuit;
+	
+	private ChangeListener dayChangeListener;
+	
+	private Model model = new Model(this);
 
 	/**
 	 * Launch the application.
@@ -122,7 +127,7 @@ public class View {
 		/**
 		 * Next Button
 		 */
-		JButton nextButton = new JButton(">");
+		nextButton = new JButton(">");
 		arrowPanel.add(nextButton);
 		addNextButtonListener(nextButton);
 		
@@ -178,11 +183,10 @@ public class View {
 		JPanel currentDaySelected = new JPanel();
 		titleNsaveBar.add(currentDaySelected, BorderLayout.NORTH);
 		
-		JLabel lblDay = new JLabel("Day");
-		currentDaySelected.add(lblDay);
-		lblDay.setText(model.getMMDDYY());
-		System.out.println(model.getMMDDYY());
-		//System.out.println(model.getDay());
+		//Current Date to Display Here
+		lblDate = new JLabel("Day");
+		currentDaySelected.add(lblDate);
+		lblDate.setText(model.getMMDDYY()); //hmmm can we get this to update everytime model changes
 
 		txtTimeStart = new JTextField();
 		txtTimeStart.setText("Time Start");
@@ -253,17 +257,7 @@ public class View {
 		prevButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedDay = model.getDay();
-				int selectedIndex = model.getSelectedDayIndex(); //day 1 is index 0 day 16 is index15, 15 is index 14
-				
-				System.out.println("this is current day b4 button presed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
-				
-				selectedDay--;
-				selectedIndex--;
-				model.setDay(selectedDay);
-				System.out.println("this is selected day after button pressed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+				model.retreatPrevDay();
 			}
 		});
 
@@ -272,26 +266,7 @@ public class View {
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedDay = model.getDay();
-				int selectedIndex = model.getSelectedDayIndex(); //day 1 is index 0 day 16 is index15, 15 is index 14
-				
-				System.out.println("this is current day b4 button presed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.black));
-				if (selectedDay == model.getLastDayOfMonth()) {
-					selectedIndex = 0;
-					model.setDay(1);
-					model.setMonth(model.getMonthInt());
-					System.out.println("this damn current month" + model.getMonthInt());
-					lblMonth.setText(model.getMonth());
-					lblYear.setText(model.getYear());
-				}
-				else {
-					selectedDay++;
-					selectedIndex++;
-					model.setDay(selectedDay);
-				}
-				System.out.println("this is selected day after button pressed: " + selectedDay);
-				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+				model.advanceNextDay();
 			}
 		});
 	}
@@ -304,8 +279,16 @@ public class View {
 			}
 		});
 	}
-
 	
-
+	public void updateViewSelecteDay() {
+		lblDate.setText(model.getMMDDYY());
+		lblMonth.setText(model.getMonth());
+		lblYear.setText(model.getYear());
+		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.blue, 5));	
+	}
+	public void removeViewSelectedDay() {
+		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.black));
+		
+	}
 	
 }

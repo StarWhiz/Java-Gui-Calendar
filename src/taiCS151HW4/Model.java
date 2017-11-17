@@ -1,10 +1,12 @@
 package taiCS151HW4;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import javax.swing.BorderFactory;
 import javax.swing.event.ChangeListener;
 
 public class Model {
@@ -12,16 +14,18 @@ public class Model {
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
 	
-	int currentDay;
-	int selectedDay;
-	int selectedIndex;
-	int currentMonth;
-	String currentDate;
+	private int currentDay;
+	private int selectedDay;
+	private int selectedIndex;
+	private int currentMonth;
+	private String currentDate;
+	private static View view;
 	
 	private ArrayList<ChangeListener> aListOfChangeListeners;
 
 	
-	Model () {
+	Model (View v) {
+		view = v;
 		aListOfChangeListeners = new ArrayList<ChangeListener> ();
 		eventManager = new EventManager();
 		c = new GregorianCalendar();
@@ -36,7 +40,6 @@ public class Model {
 		
 		eventManager.loadEvents();
 		eventManager.displayEventBasedOnDate("11/14/17");
-		
 		initializeCalendar();
 
 
@@ -85,6 +88,7 @@ public class Model {
 	public void setDay(int day) {
 		c.set(Calendar.DATE, day);
 		selectedDay = c.get(Calendar.DATE);
+		view.updateViewSelecteDay();
 		//System.out.println(c.get(Calendar.DATE));
 	}
 	public int getMonthInt() {
@@ -104,4 +108,42 @@ public class Model {
 		eventManager.saveEvents();
 		System.out.println("Program will now save events to file & quit");
 	}
+	public void advanceNextDay() {
+		System.out.println("this is current day b4 button presed: " + selectedDay);
+		view.removeViewSelectedDay();
+		if (selectedDay == this.getLastDayOfMonth()) {
+			selectedIndex = 0;
+			this.setDay(1);
+			this.setMonth(this.getMonthInt());
+			System.out.println("this damn current month" + this.getMonthInt());
+			
+		}
+		else {
+			selectedDay++;
+			selectedIndex++;
+			this.setDay(selectedDay);
+		}
+		view.updateViewSelecteDay();
+		System.out.println("this is selected day after button pressed: " + selectedDay);
+	}
+	public void retreatPrevDay() {
+		System.out.println("this is current day b4 button presed: " + selectedDay);
+		view.removeViewSelectedDay();
+		if (selectedDay == this.getLastDayOfMonth()) {
+			selectedIndex = 0;
+			this.setDay(1);
+			this.setMonth(this.getMonthInt());
+			System.out.println("this damn current month" + this.getMonthInt());
+			
+		}
+		else {
+			selectedDay--;
+			selectedIndex--;
+			this.setDay(selectedDay);
+		}
+		view.updateViewSelecteDay();
+		System.out.println("this is selected day after button pressed: " + selectedDay);
+
+	}
+	
 }
