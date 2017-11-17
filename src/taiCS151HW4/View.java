@@ -28,6 +28,9 @@ public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
 
 	private JFrame frame;
+	private JLabel lblMonth;
+	private JLabel lblYear;
+	
 	private JTextField txtTimeStart;
 	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -87,11 +90,14 @@ public class View {
 		titlePanel.add(monthTitlePanel, BorderLayout.CENTER);
 		monthTitlePanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblMonth = DefaultComponentFactory.getInstance().createLabel("Month");
+		/**
+		 * Month & Year Labels
+		 */
+		lblMonth = DefaultComponentFactory.getInstance().createLabel("Month");
 		lblMonth.setFont(new Font("Tahoma", Font.BOLD, 16));
 		monthTitlePanel.add(lblMonth, BorderLayout.CENTER);
 		
-		JLabel lblYear = new JLabel("Year");
+		lblYear = new JLabel("Year");
 		lblYear.setFont(new Font("Tahoma", Font.BOLD, 16));
 		monthTitlePanel.add(lblYear, BorderLayout.EAST);
 		
@@ -99,7 +105,7 @@ public class View {
 		titlePanel.add(arrowPanel, BorderLayout.EAST);
 		
 		/**
-		 * Previous button here
+		 * Previous button
 		 */
 		JButton prevButton = new JButton("<");
 		arrowPanel.add(prevButton);
@@ -120,7 +126,9 @@ public class View {
 				aListDayButtons.get(selectedIndex).setBackground(Color.black);
 			}
 		});
-		
+		/**
+		 * Next Button
+		 */
 		JButton nextButton = new JButton(">");
 		arrowPanel.add(nextButton);
 		nextButton.addActionListener(new ActionListener() {
@@ -246,6 +254,8 @@ public class View {
 		}
 		aListDayButtons.get(model.getDay()-1).setForeground(Color.green);
 		aListDayButtons.get(model.getDay()-1).setBackground(Color.black);
+		lblMonth.setText(model.getMonth());
+		lblYear.setText(model.getYear());
 	}
 	
 

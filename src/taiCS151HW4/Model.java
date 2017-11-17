@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import javax.swing.event.ChangeListener;
 
 public class Model {
-    public static String[] arrayMonths = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+  
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
 	
@@ -57,10 +57,13 @@ public class Model {
 		c.set(Calendar.DAY_OF_MONTH, 1);
 		return (c.get(Calendar.DAY_OF_WEEK));
 	}
-	public int getMonth() {
-		//String currentMonth= new SimpleDateFormat("MMM").format(c.getTime());
-		int currentMonth = c.get(Calendar.MONTH);
+	public String getMonth() {
+		String currentMonth= new SimpleDateFormat("MMMM").format(c.getTime());
 		return currentMonth;
+	}
+	public String getYear() {
+		String currentYear = new SimpleDateFormat("YYYY").format(c.getTime());
+		return currentYear;
 	}
 	public int getDay() {
 		return currentDay;
