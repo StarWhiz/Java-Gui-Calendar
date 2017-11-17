@@ -135,7 +135,9 @@ public class View {
 		daysPanel = new JPanel();
 		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
 		daysPanel.setLayout(new GridLayout(0,7));
+
 		updateViewCalendar();
+		
 
 		/**
 		 * This part lists all the times from 0:00 to 23:00
@@ -282,6 +284,8 @@ public class View {
 			aListDayButtons.get(i).setBorder(BorderFactory.createLineBorder(Color.black, 1));
 			daysPanel.add(aListDayButtons.get(i));
 		}
+		lblMonth.setText(model.getMonth());
+		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
 	}
 	public void clearCalendarDays() {

@@ -18,6 +18,7 @@ public class Model {
 	private int selectedDay;
 	private int selectedIndex;
 	private int selectedMonth;
+	private int selectedYear;
 
 	private String currentDate;
 	private static View view;
@@ -33,6 +34,7 @@ public class Model {
 		c = (GregorianCalendar) GregorianCalendar.getInstance();
 		selectedDay = c.get(Calendar.DATE);
 		selectedMonth = c.get(Calendar.MONTH);
+		selectedYear =c.get(Calendar.YEAR);
 		System.out.println(selectedDay);
 		
 		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
@@ -96,6 +98,9 @@ public class Model {
 	public void setMonth(int month) {
 		c.set(Calendar.MONTH, month);
 	}
+	public void setYear(int year) {
+		c.set(Calendar.YEAR, year);
+	}
 	public String getMMDDYY() {
 		int currentDateDay = selectedDay;
 		String currentDateMonth = new SimpleDateFormat("MM").format(c.getTime());
@@ -114,16 +119,16 @@ public class Model {
 			selectedIndex = 0;
 			System.out.println("this damn current month b4 " + selectedMonth);
 			selectedMonth = getMonthInt();
+			
 			System.out.println("this damn current month after " + selectedMonth);
+			if (selectedMonth > 11) {
+				selectedYear++;
+				this.setYear(selectedYear);
+				selectedMonth = 0;
+			}
 			this.setMonth(selectedMonth);
 			this.setDay(1);
 			view.clearCalendarDays();
-			view.updateViewCalendar();
-
-		}
-		else if (selectedDay == 1){
-			this.setMonth(selectedMonth -1);
-			selectedDay = this.getLastDayOfMonth();
 			view.updateViewCalendar();
 		}
 		else {
