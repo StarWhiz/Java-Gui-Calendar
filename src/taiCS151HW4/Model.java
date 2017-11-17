@@ -68,7 +68,7 @@ public class Model {
 	public void setDay(int day) {
 		c.set(Calendar.DATE, day);
 		currentDay = c.get(Calendar.DATE);
-		System.out.println(c.get(Calendar.DATE));
+		//System.out.println(c.get(Calendar.DATE));
 	}
 	public void saveNquit() {
 		eventManager.saveEvents();

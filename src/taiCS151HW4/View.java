@@ -104,7 +104,7 @@ public class View {
 		prevButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(model.getDay());
+				//System.out.println(model.getDay());
 				model.setDay(model.getDay()-1);
 				System.out.println(model.getDay());
 			}
@@ -112,6 +112,14 @@ public class View {
 		
 		JButton nextButton = new JButton(">");
 		arrowPanel.add(nextButton);
+		nextButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println(model.getDay());
+				model.setDay(model.getDay()+1);
+				System.out.println(model.getDay());
+			}
+		});
 		
 		printCalendar(mainCalendarPanel); //Fills Calendar
 		
