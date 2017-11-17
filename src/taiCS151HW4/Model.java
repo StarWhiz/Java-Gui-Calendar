@@ -17,7 +17,8 @@ public class Model {
 	private int currentDay;
 	private int selectedDay;
 	private int selectedIndex;
-	private int currentMonth;
+	private int selectedMonth;
+
 	private String currentDate;
 	private static View view;
 	
@@ -31,7 +32,7 @@ public class Model {
 		c = new GregorianCalendar();
 		c = (GregorianCalendar) GregorianCalendar.getInstance();
 		selectedDay = c.get(Calendar.DATE);
-		currentMonth = c.get(Calendar.MONTH);
+		selectedMonth = c.get(Calendar.MONTH);
 		System.out.println(selectedDay);
 		
 		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
@@ -45,10 +46,8 @@ public class Model {
 
 	}
 	public void initializeCalendar() {
-
-		int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
-		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-
+		//int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
+		//int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
 		//System.out.println("This is the current Month: " + currentMonth);
 		//System.out.println("This is the current Year: " + currentYear);
 		//System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);
@@ -92,7 +91,7 @@ public class Model {
 		//System.out.println(c.get(Calendar.DATE));
 	}
 	public int getMonthInt() {
-		return currentMonth+1;
+		return selectedMonth+1;
 	}
 	public void setMonth(int month) {
 		c.set(Calendar.MONTH, month);
@@ -113,9 +112,16 @@ public class Model {
 		view.removeViewSelectedDay();
 		if (selectedDay == this.getLastDayOfMonth()) {
 			selectedIndex = 0;
+			System.out.println("this damn current month b4 " + selectedMonth);
+			selectedMonth = getMonthInt();
+			System.out.println("this damn current month after " + selectedMonth);
+			this.setMonth(selectedMonth);
 			this.setDay(1);
-			this.setMonth(this.getMonthInt());
-			System.out.println("this damn current month" + this.getMonthInt());
+
+		}
+		else if (selectedDay == 1){
+			this.setMonth(selectedMonth -1);
+			selectedDay = this.getLastDayOfMonth();
 			
 		}
 		else {
@@ -134,7 +140,6 @@ public class Model {
 			this.setDay(1);
 			this.setMonth(this.getMonthInt());
 			System.out.println("this damn current month" + this.getMonthInt());
-			
 		}
 		else {
 			selectedDay--;
@@ -143,7 +148,5 @@ public class Model {
 		}
 		view.updateViewSelecteDay();
 		System.out.println("this is selected day after button pressed: " + selectedDay);
-
 	}
-	
 }

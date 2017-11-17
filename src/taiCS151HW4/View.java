@@ -43,8 +43,6 @@ public class View {
 	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
 	
-	private ChangeListener dayChangeListener;
-	
 	private Model model = new Model(this);
 
 	/**
@@ -288,7 +286,6 @@ public class View {
 	}
 	public void removeViewSelectedDay() {
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.black));
-		
 	}
 	
 }
