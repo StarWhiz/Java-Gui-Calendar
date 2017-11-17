@@ -112,51 +112,46 @@ public class Model {
 		System.out.println("Program will now save events to file & quit");
 	}
 	public void advanceNextDay() {
-		//System.out.println("this is current day b4 button presed: " + selectedDay);
 		view.removeViewSelectedDay();
-		if (selectedDay == this.getLastDayOfMonth()) { // so if selecte day of Nov = 30 then...
-			selectedMonth = getMonthInt(); //advance one month
+		if (selectedDay == this.getLastDayOfMonth()) { 
+			selectedMonth++;
 			this.setMonth(selectedMonth);
-			System.out.println("this damn current month after " + selectedMonth);
-			
-			if (selectedMonth == 12) {
+			///////////////////////////////
+			if (selectedMonth == 12) { // December
 				selectedYear++;
 				this.setYear(selectedYear);
-				selectedMonth = 0;
-				this.setMonth(selectedMonth);
-			}
-			System.out.println("currently selected FINAL day...:" + selectedDay);
+	
+				selectedDay = 1;
+				this.setDay(selectedDay);
+			}///////////////////////////////
 			selectedDay = 1;
-
 			this.setDay(selectedDay);
-
-			System.out.println("day after zeroing...:" + selectedDay);
 			view.clearCalendarDays();
 			view.updateViewCalendar();
 		}
 		else {
 			selectedDay++;
 			selectedIndex++;
-			System.out.println("currently selected day...:" + selectedDay);
 			this.setDay(selectedDay);
 		}
 		view.updateViewSelecteDay();
-		//System.out.println("this is selected day after button pressed: " + selectedDay);
 	}
 	public void retreatPrevDay() {
-		System.out.println("this is current day b4 button presed: " + selectedDay);
 		view.removeViewSelectedDay();
-		if (selectedDay == 1) { //1
+		if (selectedDay == 1) { 
 			selectedMonth--;
-			this.setMonth(selectedMonth); //month is 9 in index which is october 10
-			selectedDay = this.getLastDayOfMonth();
-			selectedIndex = selectedDay - 1;
-			if (selectedMonth == 0) {
+			this.setMonth(selectedMonth); 
+			///////////////////////////////			
+			if (selectedMonth == 0) { // January
 				selectedYear--;
 				this.setYear(selectedYear);
-				selectedMonth = 11;
+				selectedMonth = 11; // December
 				this.setMonth(selectedMonth);
-			}
+				selectedDay = this.getLastDayOfMonth(); //31
+				this.setDay(selectedDay);
+			}///////////////////////////////
+			selectedDay = this.getLastDayOfMonth(); 
+			this.setDay(selectedDay);
 			view.clearCalendarDays();
 			view.updateViewCalendar();
 		}
@@ -166,6 +161,5 @@ public class Model {
 			this.setDay(selectedDay);
 		}
 		view.updateViewSelecteDay();
-		System.out.println("this is selected day after button pressed: " + selectedDay);
 	}
 }
