@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -105,8 +107,12 @@ public class View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(model.getDay());
+				aListDayButtons.get(model.getDay()).setForeground(Color.black);
+				aListDayButtons.get(model.getDay()).setBackground(Color.white);
 				model.setDay(model.getDay()-1);
 				System.out.println(model.getDay());
+				aListDayButtons.get(model.getDay()).setForeground(Color.green);
+				aListDayButtons.get(model.getDay()).setBackground(Color.black);
 			}
 		});
 		
@@ -217,10 +223,15 @@ public class View {
 		for (int i = 1; i <= model.getTotalDaysOfCurrentMonth(); i++ ) {
 			JButton temp = new JButton(i+"");
 			aListDayButtons.add(temp);
+
 		}
 		for (int i = 0; i < aListDayButtons.size(); i++ ) {
+			aListDayButtons.get(i).setBackground(Color.black);
+			aListDayButtons.get(i).setBackground(Color.white);
 			daysPanel.add(aListDayButtons.get(i));
 		}
+		aListDayButtons.get(model.getDay()).setForeground(Color.green);
+		aListDayButtons.get(model.getDay()).setBackground(Color.black);
 	}
 	
 
