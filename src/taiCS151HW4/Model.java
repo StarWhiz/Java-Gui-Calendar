@@ -45,9 +45,7 @@ public class Model {
 
 		int firstDayOfMonth = c.get(Calendar.DAY_OF_WEEK);
 		int totalDaysInMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);
-		
-		System.out.println(currentDate);
-		System.out.println("hello?");
+
 		//System.out.println("This is the current Month: " + currentMonth);
 		//System.out.println("This is the current Year: " + currentYear);
 		//System.out.println("This is the first day of the month: " + arrayDays[firstDayOfMonth]);

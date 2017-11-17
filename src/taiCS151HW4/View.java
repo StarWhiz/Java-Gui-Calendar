@@ -164,13 +164,23 @@ public class View {
 		frame.getContentPane().add(eventCreationPanel);
 		eventCreationPanel.setLayout(new BorderLayout(0, 0));
 		
+		JPanel titleNsaveBar = new JPanel();
+		eventCreationPanel.add(titleNsaveBar, BorderLayout.NORTH);
+		titleNsaveBar.setLayout(new BorderLayout(0, 0));
+		
+		JPanel savebar = new JPanel();
+		titleNsaveBar.add(savebar, BorderLayout.CENTER);
+		savebar.setLayout(new GridLayout(1, 0, 30, 0));
+		
 		JTextPane textPane = new JTextPane();
 		eventCreationPanel.add(textPane, BorderLayout.CENTER);
 		
-		JPanel savebar = new JPanel();
-		eventCreationPanel.add(savebar, BorderLayout.NORTH);
-		savebar.setLayout(new GridLayout(1, 0, 30, 0));
+		JPanel currentDaySelected = new JPanel();
+		titleNsaveBar.add(currentDaySelected, BorderLayout.NORTH);
 		
+		JLabel lblDay = new JLabel("Day");
+		currentDaySelected.add(lblDay);
+
 		txtTimeStart = new JTextField();
 		txtTimeStart.setText("Time Start");
 		savebar.add(txtTimeStart);
@@ -180,19 +190,17 @@ public class View {
 		txtTimeEnd.setText("Time End");
 		savebar.add(txtTimeEnd);
 		txtTimeEnd.setColumns(10);
-		
 		/**
 		 * Quit Button Here
 		 */
+		
 		btnQuit = new JButton("Quit & Save");
 		savebar.add(btnQuit);
-		btnQuit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.saveNquit();
-				System.exit(0);
-			}
-		});
+		addQuitNsaveButtonListener(btnQuit);
+		
+
+		
+
 		
 	}
 	
@@ -281,6 +289,15 @@ public class View {
 				}
 				System.out.println("this is selected day after button pressed: " + selectedDay);
 				aListDayButtons.get(selectedIndex).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+			}
+		});
+	}
+	public void addQuitNsaveButtonListener(JButton btnQuit) {
+		btnQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.saveNquit();
+				System.exit(0);
 			}
 		});
 	}
