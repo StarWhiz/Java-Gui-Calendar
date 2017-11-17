@@ -104,7 +104,9 @@ public class View {
 		prevButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				model.setCurrentMonth(month);
+				System.out.println(model.getDay());
+				model.setDay(model.getDay()-1);
+				System.out.println(model.getDay());
 			}
 		});
 		
