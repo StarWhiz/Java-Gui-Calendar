@@ -106,13 +106,18 @@ public class View {
 		prevButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(model.getDay());
-				aListDayButtons.get(model.getDay()).setForeground(Color.black);
-				aListDayButtons.get(model.getDay()).setBackground(Color.white);
-				model.setDay(model.getDay()-1);
-				System.out.println(model.getDay());
-				aListDayButtons.get(model.getDay()).setForeground(Color.green);
-				aListDayButtons.get(model.getDay()).setBackground(Color.black);
+				int selectedDay = model.getDay();
+				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				
+				System.out.println("this is current day b4 button presed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setForeground(Color.black);
+				aListDayButtons.get(selectedIndex).setBackground(Color.white);
+				selectedDay--;
+				selectedIndex--;
+				model.setDay(selectedDay);
+				System.out.println("this is selected day after button pressed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setForeground(Color.green);
+				aListDayButtons.get(selectedIndex).setBackground(Color.black);
 			}
 		});
 		
@@ -121,9 +126,18 @@ public class View {
 		nextButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(model.getDay());
-				model.setDay(model.getDay()+1);
-				System.out.println(model.getDay());
+				int selectedDay = model.getDay();
+				int selectedIndex = selectedDay-1; //day 1 is index 0 day 16 is index15, 15 is index 14
+				
+				System.out.println("this is current day b4 button presed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setForeground(Color.black);
+				aListDayButtons.get(selectedIndex).setBackground(Color.white);
+				selectedDay++;
+				selectedIndex++;
+				model.setDay(selectedDay);
+				System.out.println("this is selected day after button pressed: " + selectedDay);
+				aListDayButtons.get(selectedIndex).setForeground(Color.green);
+				aListDayButtons.get(selectedIndex).setBackground(Color.black);
 			}
 		});
 		
@@ -230,8 +244,8 @@ public class View {
 			aListDayButtons.get(i).setBackground(Color.white);
 			daysPanel.add(aListDayButtons.get(i));
 		}
-		aListDayButtons.get(model.getDay()).setForeground(Color.green);
-		aListDayButtons.get(model.getDay()).setBackground(Color.black);
+		aListDayButtons.get(model.getDay()-1).setForeground(Color.green);
+		aListDayButtons.get(model.getDay()-1).setBackground(Color.black);
 	}
 	
 
