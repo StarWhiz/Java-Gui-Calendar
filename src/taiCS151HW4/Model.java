@@ -89,7 +89,7 @@ public class Model {
 	public void setDay(int day) {
 		c.set(Calendar.DATE, day);
 		selectedDay = c.get(Calendar.DATE);
-		view.updateViewSelecteDay();
+		view.highlightDay();
 	}
 	public int getMonthInt() {
 		return selectedMonth+1;
@@ -112,7 +112,7 @@ public class Model {
 		System.out.println("Program will now save events to file & quit");
 	}
 	public void advanceNextDay() {
-		view.removeViewSelectedDay();
+		view.unHighlightDay();
 		if (selectedDay == this.getLastDayOfMonth()) { 
 			c.add(Calendar.MONTH, 1);
 			selectedDay = 1;
@@ -124,11 +124,11 @@ public class Model {
 			this.setDay(selectedDay);
 		}
 		view.clearCalendarDays();
-		view.updateViewCalendar();
-		view.updateViewSelecteDay();
+		view.repaintCalendarView();
+		view.highlightDay();
 	}
 	public void retreatPrevDay() {
-		view.removeViewSelectedDay();
+		view.unHighlightDay();
 		if (selectedDay == 1) { 
 			c.add(Calendar.MONTH, -1);
 			selectedDay = this.getLastDayOfMonth();
@@ -139,9 +139,7 @@ public class Model {
 			this.setDay(selectedDay);
 		}
 		view.clearCalendarDays();
-		view.updateViewCalendar();
-		view.updateViewSelecteDay();
+		view.repaintCalendarView();
+		view.highlightDay();
 	}
-	
-
 }

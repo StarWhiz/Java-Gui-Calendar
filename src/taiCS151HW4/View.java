@@ -27,6 +27,10 @@ import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
 
+/**
+ * View Portion of the Code......................................................................
+ */
+
 public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
     public final static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -136,7 +140,7 @@ public class View {
 		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
 		daysPanel.setLayout(new GridLayout(0,7));
 
-		updateViewCalendar();
+		repaintCalendarView();
 		
 
 		/**
@@ -209,15 +213,11 @@ public class View {
 		btnQuit = new JButton("Quit & Save");
 		savebar.add(btnQuit);
 		addQuitNsaveButtonListener(btnQuit);
-		
-
-		
-
-		
+	
 	}
 	
 	/**
-	 * Controller
+	 * Controller Portion of the Code...........................................................
 	 */
 
 	public void addPrevButtonListener(JButton prevButton) {
@@ -247,16 +247,16 @@ public class View {
 		});
 	}
 	
-	public void updateViewSelecteDay() {
+	public void highlightDay() {
 		lblDate.setText(model.getMMDDYY());
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.blue, 5));	
 	}
-	public void removeViewSelectedDay() {
+	public void unHighlightDay() {
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	public void updateViewCalendar() {
+	public void repaintCalendarView() {
 		//Prints Sun-Sat
 		for (int i = 0; i < arrayDays.length ; i++) {
 			JLabel temp = new JLabel();
@@ -279,9 +279,18 @@ public class View {
 
 		}
 		for (int i = 0; i < aListDayButtons.size(); i++ ) {
+			final int d = i+1;
 			aListDayButtons.get(i).setBackground(Color.black);
 			aListDayButtons.get(i).setBackground(Color.white);
 			aListDayButtons.get(i).setBorder(BorderFactory.createLineBorder(Color.black, 1));
+			aListDayButtons.get(i).addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					unHighlightDay();
+					model.setDay(d);
+					highlightDay();	
+				}
+			});
 			daysPanel.add(aListDayButtons.get(i));
 		}
 		lblMonth.setText(model.getMonth());
@@ -294,4 +303,5 @@ public class View {
 		daysPanel.repaint();
 		aListDayButtons.removeAll(aListDayButtons);
 	}
+
 }
