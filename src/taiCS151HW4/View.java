@@ -83,7 +83,7 @@ public class View {
 	 */
 	private void initialize() {
 		mainFrame = new JFrame();
-		mainFrame.setBounds(100, 100, 900, 1000);
+		mainFrame.setBounds(100, 100, 900, 550);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setVisible(true);
@@ -102,7 +102,7 @@ public class View {
 		monthTitlePanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel mainEventPanel = new JPanel();
-		mainEventPanel.setBounds(446, 16, 417, 912);
+		mainEventPanel.setBounds(446, 16, 417, 489);
 		mainFrame.getContentPane().add(mainEventPanel);
 		mainEventPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -148,23 +148,25 @@ public class View {
 		 */
 		JPanel timePanel = new JPanel();
 		
-		mainEventPanel.add(timePanel, BorderLayout.WEST);
 		
+		/*
+		mainEventPanel.add(timePanel, BorderLayout.WEST);
 		timePanel.setLayout(new GridLayout(24, 1, 0, 0));
         for (int i = 0; i < DAY_HOURS; i++) {
             timePanel.add(new JLabel(i + ":00"));
         }
+        */
 		
 		JPanel eventsPanel = new JPanel();
 		mainEventPanel.add(eventsPanel, BorderLayout.CENTER);
+		eventsPanel.setLayout(new BorderLayout(0, 0));
+		
+		JList eventList = new JList();
+		eventsPanel.add(eventList);
 		
 		JPanel eventTitlePanel = new JPanel();
 		mainEventPanel.add(eventTitlePanel, BorderLayout.NORTH);
 		eventTitlePanel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblTime = new JLabel("Time   ");
-		lblTime.setFont(new Font("Tahoma", Font.BOLD, 16));
-		eventTitlePanel.add(lblTime, BorderLayout.WEST);
 		
 		JLabel lblEvents = new JLabel("Events");
 		lblEvents.setFont(new Font("Tahoma", Font.BOLD, 16));
