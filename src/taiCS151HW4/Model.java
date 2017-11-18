@@ -1,12 +1,9 @@
 package taiCS151HW4;
 
-import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import javax.swing.BorderFactory;
 import javax.swing.event.ChangeListener;
 
 public class Model {
@@ -142,13 +139,29 @@ public class Model {
 		return selectedMonth+1;
 	}
 	
-	
+	/**
+	 * This function changes the selected month in GregorianCalendar
+	 * 
+	 * @param month
+	 */
 	public void setMonth(int month) {
 		c.set(Calendar.MONTH, month);
 	}
+	
+	/**
+	 * This function sets the selected year in GregorianCalendar
+	 * 
+	 * @param year
+	 */
 	public void setYear(int year) {
 		c.set(Calendar.YEAR, year);
 	}
+	
+	/**
+	 * This function returns the current date in MM/DD/YY format as a string
+	 * 
+	 * @return String mmDDYY
+	 */
 	public String getMMDDYY() {
 		int currentDateDay = selectedDay;
 		String currentDateMonth = new SimpleDateFormat("MM").format(c.getTime());
@@ -156,10 +169,18 @@ public class Model {
 		String mmDDYY = currentDateMonth + "/" + currentDateDay + "/" + currentDateYear;
 		return mmDDYY;
 	}
+	
+	/**
+	 * This function saves calls eventManger to save events created to a file before quitting the program
+	 */
 	public void saveNquit() {
 		eventManager.saveEvents();
 		System.out.println("Program will now save events to file & quit");
 	}
+	
+	/**
+	 * This function advances the selected day in GregorianCalendar to the next day
+	 */
 	public void advanceNextDay() {
 		view.unHighlightDay();
 		if (selectedDay == this.getLastDayOfMonth()) { 
@@ -176,6 +197,10 @@ public class Model {
 		view.repaintCalendarView();
 		view.highlightDay();
 	}
+	
+	/**
+	 * This function retreats the selected day in GregorianCalendar to the prev day
+	 */
 	public void retreatPrevDay() {
 		view.unHighlightDay();
 		if (selectedDay == 1) { 
