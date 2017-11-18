@@ -30,7 +30,6 @@ import javax.swing.event.ChangeListener;
 /**
  * View Portion of the Code......................................................................
  */
-
 public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
     public final static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -69,7 +68,6 @@ public class View {
 	/**
 	 * Create the application.
 	 */
-	
 	public void start() {
 		frame.setVisible(true);
 	}
@@ -229,6 +227,12 @@ public class View {
 		});
 
 	}
+	
+	/**
+	 * This function adds a listener to the next button.
+	 * 
+	 * @param nextButton
+	 */
 	public void addNextButtonListener(JButton nextButton) {
 		nextButton.addActionListener(new ActionListener() {
 			@Override
@@ -237,6 +241,12 @@ public class View {
 			}
 		});
 	}
+	
+	/**
+	 * This function adds a listener to the Save & Quit button.
+	 * 
+	 * @param nextButton
+	 */
 	public void addQuitNsaveButtonListener(JButton btnQuit) {
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
@@ -247,15 +257,27 @@ public class View {
 		});
 	}
 	
+	/**
+	 * This function is responsible for highlighting the selected day from the model 
+	 */
+	
 	public void highlightDay() {
 		lblDate.setText(model.getMMDDYY());
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.blue, 5));	
 	}
+	
+	/**
+	 * This function is responsible for dehighlighting the currently selected day before changing it
+	 */
 	public void unHighlightDay() {
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.black));
 	}
+	
+	/**
+	 * This function is responsible for painting the calendar
+	 */
 	public void repaintCalendarView() {
 		//Prints Sun-Sat
 		for (int i = 0; i < arrayDays.length ; i++) {
@@ -297,11 +319,14 @@ public class View {
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
 	}
+	
+	/**
+	 * This function clears the calendar days panel.
+	 */
 	public void clearCalendarDays() {
 		daysPanel.removeAll();
 		daysPanel.revalidate();
 		daysPanel.repaint();
 		aListDayButtons.removeAll(aListDayButtons);
 	}
-
 }
