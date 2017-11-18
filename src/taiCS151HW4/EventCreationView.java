@@ -9,6 +9,12 @@ import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
 import java.awt.CardLayout;
 import javax.swing.JSplitPane;
+import javax.swing.JButton;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
 
 public class EventCreationView {
 
@@ -17,6 +23,7 @@ public class EventCreationView {
 	private JTextField textMMstart;
 	private JTextField textHHend;
 	private JTextField textMMend;
+	private JTextField txtEventName;
 	
 	/**
 	 * Create the application.
@@ -31,11 +38,11 @@ public class EventCreationView {
 	private void initialize(String date) {
 		System.out.println("INITIALIZE");
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 250);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBounds(0, 0, 428, 244);
+		mainPanel.setBounds(0, 0, 426, 190);
 		frame.getContentPane().add(mainPanel);
 		mainPanel.setLayout(new BorderLayout(0, 0));
 		
@@ -85,8 +92,25 @@ public class EventCreationView {
 		mainPanel.add(creationPanel, BorderLayout.CENTER);
 		creationPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel SelectedDay = new JLabel("Selected Day: " + date);
-		creationPanel.add(SelectedDay, BorderLayout.CENTER);
+		JPanel panel = new JPanel();
+		creationPanel.add(panel, BorderLayout.EAST);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JButton btnCancel = new JButton("Cancel");
+		panel.add(btnCancel);
+		
+		JButton btnCreateEvent = new JButton("Create Event");
+		panel.add(btnCreateEvent);
+		
+		JLabel lblSelectedDay = new JLabel("Selected Day: " + date + "   ");
+		lblSelectedDay.setHorizontalAlignment(SwingConstants.LEFT);
+		creationPanel.add(lblSelectedDay, BorderLayout.SOUTH);
+		
+		txtEventName = new JTextField();
+		txtEventName.setHorizontalAlignment(SwingConstants.LEFT);
+		txtEventName.setText("Enter Event Name Here...");
+		creationPanel.add(txtEventName, BorderLayout.CENTER);
+		txtEventName.setColumns(10);
 		frame.setVisible(true);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
