@@ -256,6 +256,10 @@ public class View {
 	public void addCreateEventButtonListener(JButton createEventButton) {
 		createEventButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				EventCreationView newEvent = new EventCreationView(model.getMMDDYY());
+			
+				/*
 				eventCreationFrame = new JFrame();
 				eventCreationFrame.setBounds(200, 200, 400, 200);
 				eventCreationFrame.getContentPane().setLayout(null);
@@ -263,9 +267,12 @@ public class View {
 				
 				JPanel mainPanel = new JPanel();
 				mainPanel.setLayout(new BorderLayout(0, 0));
+				mainPanel.setVisible(true);
 				eventCreationFrame.getContentPane().add(mainPanel);
 				
 				JPanel startPanel = new JPanel();
+				startPanel.setVisible(true);
+				
 				
 				JLabel startLabel = new JLabel("Starting Time: ");
 				JTextField startTimeHours = new JTextField("HH");
@@ -276,6 +283,7 @@ public class View {
 				startPanel.add(startTimeHours);
 				startPanel.add(startColon);
 				startPanel.add(startTimeMins);
+				eventCreationFrame.getContentPane().add(startPanel);
 				
 				mainPanel.add(startPanel, BorderLayout.CENTER);
 
@@ -291,13 +299,8 @@ public class View {
 				endPanel.add(endColon);
 				endPanel.add(endTimeMins);
 				
-
-				mainPanel.setVisible(true);
-				startPanel.setVisible(true);
-				
-				
-				model.getMMDDYY();
-				
+				 */
+	
 			}
 		});
 	}
