@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
+/**
+ * View part of Event Creation View **********************************************
+ */
 public class EventCreationView {
 
 	private JFrame frame;
@@ -115,6 +118,11 @@ public class EventCreationView {
 			
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	/**
+	 * Controller part of Event Creation View **********************************************
+	 */
+	
 	/**
 	 * This closes the EventCreationWindow when the cancel button is pressed
 	 * 
