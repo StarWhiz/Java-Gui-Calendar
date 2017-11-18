@@ -29,7 +29,6 @@ public class Model {
 		//eventManager.createEvent("Tai's third event", "11/15/17", 17, 30, 23, 59);
 		//eventManager.saveEvents();
 		eventManager.loadEvents();
-		eventManager.displayEventBasedOnDate("11/16/17");
 	}
 
 	/**
@@ -117,6 +116,7 @@ public class Model {
 		c.set(Calendar.DATE, day);
 		selectedDay = c.get(Calendar.DATE);
 		view.highlightDay();
+		view.updateEventsView();
 	}
 	
 	/**

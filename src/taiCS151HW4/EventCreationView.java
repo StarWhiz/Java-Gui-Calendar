@@ -61,7 +61,7 @@ public class EventCreationView {
 		endPanel.add(lblEndingTime);
 		
 		textHHend = new JTextField();
-		textHHend.setText("HH");
+		textHHend.setText("23");
 		textHHend.setColumns(10);
 		endPanel.add(textHHend);
 		
@@ -69,7 +69,7 @@ public class EventCreationView {
 		endPanel.add(label_2);
 		
 		textMMend = new JTextField();
-		textMMend.setText("MM");
+		textMMend.setText("00");
 		textMMend.setColumns(10);
 		endPanel.add(textMMend);
 		
@@ -80,7 +80,7 @@ public class EventCreationView {
 		startPanel.add(lblStartingTime);
 		
 		textHHstart = new JTextField();
-		textHHstart.setText("HH");
+		textHHstart.setText("19");
 		startPanel.add(textHHstart);
 		textHHstart.setColumns(10);
 		
@@ -88,7 +88,7 @@ public class EventCreationView {
 		startPanel.add(label);
 		
 		textMMstart = new JTextField();
-		textMMstart.setText("MM");
+		textMMstart.setText("00");
 		startPanel.add(textMMstart);
 		textMMstart.setColumns(10);
 		
@@ -114,7 +114,7 @@ public class EventCreationView {
 		
 		txtEventName = new JTextField();
 		txtEventName.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEventName.setText("Enter Event Name Here...");
+		txtEventName.setText("Tais working event.");
 		creationPanel.add(txtEventName, BorderLayout.CENTER);
 		txtEventName.setColumns(10);
 		frame.setVisible(true);

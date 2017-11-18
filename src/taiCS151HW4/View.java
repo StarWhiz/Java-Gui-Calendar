@@ -140,8 +140,6 @@ public class View {
 		daysPanel = new JPanel();
 		mainCalendarPanel.add(daysPanel, BorderLayout.CENTER);
 		daysPanel.setLayout(new GridLayout(0,7));
-
-		repaintCalendarView();
 		
 
 		/**
@@ -208,6 +206,8 @@ public class View {
 		quitPanel.add(quitButton);
 		addQuitButtonListener(quitButton);
 		
+		repaintCalendarView();
+		updateEventsView();
 	
 	}
 	
@@ -330,7 +330,6 @@ public class View {
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
-		updateEventsView();
 	}
 	
 	/**
@@ -344,16 +343,22 @@ public class View {
 	}
 	
 	public void updateEventsView() {
+		System.out.println("updating events view");
 		ArrayList<Event> events = new ArrayList<Event>();
 		events = model.getEventsOfSelectedDay();
-		for(int i = 0; i < events.size(); i++) {
-			JTextField tfEventTimes = new JTextField();
-			JTextField tfEventName = new JTextField();
-			String eventName = events.get(i).getTitle();
-			System.out.println("This the damn event name from selected day: " + eventName);
-			tfEventName.setText(eventName);
-			//eventList.add(tfEventName);
+		
+		if (events == null) {
+			System.out.println("No events exist for the selected day...");
 		}
-
+		else {
+			for(int i = 0; i < events.size(); i++) {
+				//JTextField tfEventTimes = new JTextField();
+				JTextField tfEventName = new JTextField();
+				String eventName = events.get(i).getTitle();
+				System.out.println("This the event name from selected day: " + eventName);
+				tfEventName.setText(eventName);
+				eventList.add(tfEventName);
+			}
+		}
 	}
 }

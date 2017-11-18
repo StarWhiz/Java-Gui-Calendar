@@ -25,15 +25,34 @@ public class EventManager {
 	}
 
 	public void createEvent(String title, String date, int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins ) {
+		//System.out.println("This is the date in createEvent under EventManager: " + date);
+		//System.out.println("This is the start hh in createEvent under EventManager: " + startTimeHours);
+		//System.out.println("This is the start mm in createEvent under EventManager: " + startTimeMins);
 		ArrayList<Event> tempEventList = new ArrayList<Event> ();
 		Event e = new Event(title, date, startTimeHours, startTimeMins, endTimeHours, endTimeMins);
+		//System.out.println("this is the event data structure: " + eventsDS);
 		
-		if(eventsDS.get(date) != null) { //check to see if an event for this date exists in our DS
-			tempEventList = eventsDS.get(date); // if it does exist copy array list.. then add the event to the arrayList
-												// otherwise just add the event to the arrayList
+		if(eventsDS == null) { 
+			tempEventList.add(e); 
+			eventsDS = new HashMap <String, ArrayList<Event>>();
+			eventsDS.put(date, tempEventList);
 		}
-		tempEventList.add(e); 
-		eventsDS.put(date, tempEventList);
+		else if (eventsDS.get(date) == null){
+			tempEventList.add(e); 
+			eventsDS.put(date, tempEventList);
+		}
+		else {
+			tempEventList = eventsDS.get(date);
+			tempEventList.add(e); 
+			eventsDS.put(date, tempEventList);
+		}
+		
+
+		//check to see if an event for this date is not empty in our DS
+		//tempEventList = eventsDS.get(date); // if it exists copy array list.. then append the event to the arrayList
+											// otherwise just add the event to the arrayList
+		//
+		//
 	}
 	
 	public void deleteEvent(Event e) {
