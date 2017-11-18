@@ -26,6 +26,7 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
+import javax.swing.SwingConstants;
 
 /**
  * View Portion of the Code......................................................................
@@ -34,17 +35,16 @@ public class View {
     private final int DAY_IN_WEEK = 7, WEEK_IN_MONTH = 6, DAY_HOURS = 24;
     public final static String[] arrayDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
     
-	private JFrame frame;
+	private JFrame mainFrame;
+	private JFrame eventCreationFrame;
+
 	private JLabel lblMonth;
 	private JLabel lblYear;
 	private JLabel lblDate;
 	private JButton prevButton;
 	private JButton nextButton;
-    private JButton btnQuit;
 	
     private JPanel daysPanel;
-	private JTextField txtTimeStart;
-	private JTextField txtTimeEnd;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
 	
 	private Model model = new Model(this);
@@ -57,7 +57,7 @@ public class View {
 			public void run() {
 				try {
 					View window = new View();
-					window.frame.setVisible(true);
+					window.mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,7 +69,7 @@ public class View {
 	 * Create the application.
 	 */
 	public void start() {
-		frame.setVisible(true);
+		mainFrame.setVisible(true);
 	}
 	
 	public View() {
@@ -80,15 +80,15 @@ public class View {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 900, 1000);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
+		mainFrame = new JFrame();
+		mainFrame.setBounds(100, 100, 900, 1000);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.getContentPane().setLayout(null);
+		mainFrame.setVisible(true);
 		
 		JPanel mainCalendarPanel = new JPanel();
 		mainCalendarPanel.setBounds(15, 16, 400, 420);
-		frame.getContentPane().add(mainCalendarPanel);
+		mainFrame.getContentPane().add(mainCalendarPanel);
 		mainCalendarPanel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel titlePanel = new JPanel();
@@ -101,7 +101,7 @@ public class View {
 		
 		JPanel mainEventPanel = new JPanel();
 		mainEventPanel.setBounds(446, 16, 417, 912);
-		frame.getContentPane().add(mainEventPanel);
+		mainFrame.getContentPane().add(mainEventPanel);
 		mainEventPanel.setLayout(new BorderLayout(0, 0));
 		
 		/**
@@ -172,45 +172,25 @@ public class View {
 		 * Event Creation Here
 		 */
 		JPanel eventCreationPanel = new JPanel();
-		eventCreationPanel.setBounds(25, 466, 390, 462);
-		frame.getContentPane().add(eventCreationPanel);
+		eventCreationPanel.setBounds(15, 466, 400, 39);
+		mainFrame.getContentPane().add(eventCreationPanel);
 		eventCreationPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel titleNsaveBar = new JPanel();
-		eventCreationPanel.add(titleNsaveBar, BorderLayout.NORTH);
-		titleNsaveBar.setLayout(new BorderLayout(0, 0));
-		
-		JPanel savebar = new JPanel();
-		titleNsaveBar.add(savebar, BorderLayout.CENTER);
-		savebar.setLayout(new GridLayout(1, 0, 30, 0));
-		
-		JTextPane textPane = new JTextPane();
-		eventCreationPanel.add(textPane, BorderLayout.CENTER);
-		
 		JPanel currentDaySelected = new JPanel();
-		titleNsaveBar.add(currentDaySelected, BorderLayout.NORTH);
+		eventCreationPanel.add(currentDaySelected, BorderLayout.CENTER);
 		
 		//Current Date to Display Here
 		lblDate = new JLabel("Day");
+		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
 		currentDaySelected.add(lblDate);
-		lblDate.setText(model.getMMDDYY()); //hmmm can we get this to update everytime model changes
-
-		txtTimeStart = new JTextField();
-		txtTimeStart.setText("Time Start");
-		savebar.add(txtTimeStart);
-		txtTimeStart.setColumns(10);
+		lblDate.setText("The currently selected day is: " + model.getMMDDYY());
 		
-		txtTimeEnd = new JTextField();
-		txtTimeEnd.setText("Time End");
-		savebar.add(txtTimeEnd);
-		txtTimeEnd.setColumns(10);
-		/**
-		 * Quit Button Here
-		 */
+		JPanel createEventPanel = new JPanel();
+		eventCreationPanel.add(createEventPanel, BorderLayout.EAST);
+		createEventPanel.setLayout(new BorderLayout(0, 0));
 		
-		btnQuit = new JButton("Quit & Save");
-		savebar.add(btnQuit);
-		addQuitNsaveButtonListener(btnQuit);
+		JButton btnCreateEvent_1 = new JButton("Create Event");
+		createEventPanel.add(btnCreateEvent_1, BorderLayout.NORTH);
 	
 	}
 	
@@ -243,18 +223,19 @@ public class View {
 	}
 	
 	/**
+	 * This function prompts the user to create an event.
+	 */
+	public void addCreateEventButtonListener(JButton btnCreateEvent) {
+		
+	}
+	
+	
+	/**
 	 * This function adds a listener to the Save & Quit button.
 	 * 
 	 * @param nextButton
 	 */
 	public void addQuitNsaveButtonListener(JButton btnQuit) {
-		btnQuit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.saveNquit();
-				System.exit(0);
-			}
-		});
 	}
 	
 	/**
@@ -262,7 +243,7 @@ public class View {
 	 */
 	
 	public void highlightDay() {
-		lblDate.setText(model.getMMDDYY());
+		lblDate.setText("The currently selected day is: " + model.getMMDDYY());
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.blue, 5));	

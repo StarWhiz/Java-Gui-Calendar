@@ -11,33 +11,23 @@ public class Model {
 	EventManager eventManager; //Manages our TreeMap events data structure
 	GregorianCalendar c; //For capturing current day
 	
-	private int currentDay;
 	private int selectedDay;
 	private int selectedIndex;
 	private int selectedMonth;
-	private int selectedYear;
-
-	private String currentDate;
 	private static View view;
-	
-	private ArrayList<ChangeListener> aListOfChangeListeners;
-
 	
 	Model (View v) {
 		view = v;
-		aListOfChangeListeners = new ArrayList<ChangeListener> ();
+
 		eventManager = new EventManager();
 		c = new GregorianCalendar();
 		c = (GregorianCalendar) GregorianCalendar.getInstance();
 		selectedDay = c.get(Calendar.DATE);
 		selectedMonth = c.get(Calendar.MONTH);
-		selectedYear =c.get(Calendar.YEAR);
-		System.out.println(selectedDay);
-		
+
 		//eventManager.createEvent("Tai's second event", "11/14/17", 17, 30, 23, 59);
 		//eventManager.createEvent("Tai's third event", "11/15/17", 17, 30, 23, 59);
 		//eventManager.saveEvents();
-		
 		eventManager.loadEvents();
 		eventManager.displayEventBasedOnDate("11/14/17");
 	}
@@ -173,7 +163,13 @@ public class Model {
 	/**
 	 * This function saves calls eventManger to save events created to a file before quitting the program
 	 */
-	public void saveNquit() {
+	public void saveNquit(String title, String startTime, String endTime) {
+		String date = this.getMMDDYY();
+		startTime.toString();
+		endTime.toString();
+		
+		//eventManager.createEvent(title, date, startTimeHours, startTimeMins, endTimeHours, endTimeMins);
+		
 		eventManager.saveEvents();
 		System.out.println("Program will now save events to file & quit");
 	}
