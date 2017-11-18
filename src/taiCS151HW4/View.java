@@ -384,7 +384,7 @@ public class View {
 			}
 		}
 		else {
-			System.out.println("Dont' DO ANYTHING!");
+			//Nothing Updates...
 		}
 	}
 	

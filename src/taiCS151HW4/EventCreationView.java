@@ -152,13 +152,9 @@ public class EventCreationView {
 				Integer hhEnd = Integer.valueOf(texthhEnd);
 				Integer mmEnd = Integer.valueOf(textmmEnd);
 				
-				System.out.println(eventTitle);
-				System.out.println(hhStart);
-				System.out.println(mmStart);
-				System.out.println(hhEnd);
-				System.out.println(mmEnd);
-				System.out.println(date);
-				
+				System.out.println("Event Created...");
+				System.out.println("Title: " + eventTitle + "  Time: " + hhStart + ":" + mmStart + " - " + hhEnd + ":" + mmEnd + "  " + date );
+
 				if (model.checkTimeConflictExists(hhStart, mmStart, hhEnd, mmEnd)) { //if true that means conflict exists
 					JOptionPane.showMessageDialog(null, 
                             "Event entered has a time conflict with another event. Please choose a different time.", 

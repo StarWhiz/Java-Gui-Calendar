@@ -24,12 +24,9 @@ public class EventManager {
 	}
 
 	public void createEvent(String title, String date, int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins ) {
-		//System.out.println("This is the date in createEvent under EventManager: " + date);
-		//System.out.println("This is the start hh in createEvent under EventManager: " + startTimeHours);
-		//System.out.println("This is the start mm in createEvent under EventManager: " + startTimeMins);
 		ArrayList<Event> tempEventList = new ArrayList<Event> ();
 		Event e = new Event(title, date, startTimeHours, startTimeMins, endTimeHours, endTimeMins);
-		//System.out.println("this is the event data structure: " + eventsDS);
+
 		
 		if(eventsDS == null) { 
 			tempEventList.add(e); 
