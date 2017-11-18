@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
@@ -147,10 +148,16 @@ public class EventCreationView {
 				
 				String date = model.getMMDDYY();
 				String eventTitle = txtEventName.getText();
-				String hhStart = textHHstart.getText();
-				String mmStart = textMMstart.getText();
-				String hhEnd = textHHend.getText();
-				String mmEnd = textMMend.getText();
+				String texthhStart = textHHstart.getText();
+				String textmmStart = textMMstart.getText();
+				String texthhEnd = textHHend.getText();
+				String textmmEnd = textMMend.getText();
+				
+				
+				Integer hhStart = Integer.valueOf(texthhStart);
+				Integer mmStart = Integer.valueOf(textmmStart);
+				Integer hhEnd = Integer.valueOf(texthhEnd);
+				Integer mmEnd = Integer.valueOf(textmmEnd);
 				
 				System.out.println(eventTitle);
 				System.out.println(hhStart);
@@ -159,10 +166,21 @@ public class EventCreationView {
 				System.out.println(mmEnd);
 				System.out.println(date);
 				
-				model.createEvent(eventTitle, date, hhStart, mmStart, hhEnd, mmEnd);
-				frame.setVisible(false);
+				if (model.checkTimeConflictExists(hhStart, mmStart, hhEnd, mmEnd)) { //if true that means conflict exists
+					JOptionPane.showMessageDialog(null, 
+                            "Event entered has a time conflict with another event. Please choose a different time.", 
+                            "Time Conflict", 
+                            JOptionPane.WARNING_MESSAGE);
+				}
+				else {
+					model.createEvent(eventTitle, date, hhStart, mmStart, hhEnd, mmEnd);
+					frame.setVisible(false);
+					
+				}
 			}	
 		});
 	}
+	
+
 	
 }

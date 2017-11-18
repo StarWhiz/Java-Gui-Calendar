@@ -163,11 +163,7 @@ public class Model {
 	/**
 	 * This function saves calls eventManger to save events created to a file before quitting the program
 	 */
-	public void createEvent(String title, String date, String textHHstart, String textMMstart, String textHHend, String textMMend) {
-		Integer hhStart = Integer.valueOf(textHHstart);
-		Integer mmStart = Integer.valueOf(textMMstart);
-		Integer hhEnd = Integer.valueOf(textHHend);
-		Integer mmEnd = Integer.valueOf(textMMend);
+	public void createEvent(String title, String date, int hhStart, int mmStart, int hhEnd, int mmEnd) {
 		eventManager.createEvent(title, date, hhStart , mmStart, hhEnd, mmEnd);
 		view.updateEventsView();
 	}
@@ -210,10 +206,28 @@ public class Model {
 		view.repaintCalendarView();
 		view.highlightDay();
 	}
+	/**
+	 * This function saves the events in the DataStructure inside eventManager into a file
+	 */
 	public void saveEventsToFile () {
 		eventManager.saveEvents();
 	}
+	
+	/**
+	 * This function returns an ArrayList of Events for the currently selected day
+	 * @return
+	 */
 	public ArrayList<Event> getEventsOfSelectedDay () {
 		return eventManager.getEventsArrListFromDate(this.getMMDDYY());
 	}
+	
+    /**
+     * This function calls eventManager to check if existing events conflict with the given time parameter. Events
+     * starting/ending on or within any other existing event will be a conflict.
+     * 
+     * @return true for time conflict, false if no conflicts
+     */
+    public boolean checkTimeConflictExists(int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins ) {
+    	return eventManager.checkTimeConflictExists(startTimeHours, startTimeMins, endTimeHours, endTimeMins);
+    }
 }

@@ -18,6 +18,7 @@ public class EventManager {
     private ObjectInputStream reader;
     private FileOutputStream fileOut;
     private ObjectOutputStream writer;
+    ArrayList<Event> eventList;
     private static final boolean DEBUG = true;
 	
 	EventManager (){
@@ -57,7 +58,7 @@ public class EventManager {
 	
 	public void deleteEvent(Event e) {
 		String tempDate = e.getDate();
-		ArrayList<Event> eventList = eventsDS.get(tempDate);
+		eventList = eventsDS.get(tempDate);
 		for (int i = 0; i < eventList.size(); i++ ) {
 			if (e == eventList.get(i)) {
 				eventList.remove(i);
@@ -127,7 +128,7 @@ public class EventManager {
 	
 	public void displayEventBasedOnDate (String date) {
 		if (eventsDS.get(date) != null){
-			ArrayList<Event> eventList = eventsDS.get(date);
+			eventList = eventsDS.get(date);
 			for (int i = 0; i < eventList.size(); i++ ) {
 				System.out.println(eventList.get(i).getTitle()); //displays all eventTitles for that date
 			}
@@ -135,7 +136,7 @@ public class EventManager {
 
 	}
 	public ArrayList<Event> getEventsArrListFromDate (String date) {
-		ArrayList<Event> eventList = new ArrayList<Event> ();
+		eventList = new ArrayList<Event> ();
 		if (eventsDS == null) {
 			return null;
 		}
@@ -150,4 +151,46 @@ public class EventManager {
 			}
 		}
 	}
+	
+    /**
+     * Check if existing events conflict with the given time parameter. Events
+     * starting/ending on or within any other existing event will be a conflict.
+     * 
+     * @return true for time conflict, false if no conflicts
+     */
+    public boolean checkTimeConflictExists(int startTimeHours, int startTimeMins, int endTimeHours, int endTimeMins )
+    {
+        for (Event e : eventList)
+        {
+            int eStartHH = e.getStartTimeHours();
+            int eStartMM = e.getStartTimeMins();
+            int eEndHH = e.getEndTimeHours();
+            int eEndMM = e.getEndTimeMins();
+            
+            int eStart = this.appendIntsTogether(eStartHH, eStartMM);
+            int eEnd = this.appendIntsTogether(eEndHH, eEndMM);
+            int start = this.appendIntsTogether(startTimeHours, startTimeMins);
+            int end = this.appendIntsTogether(endTimeHours, endTimeMins);  
+            
+            if (eStart <= start && start < eEnd) return true;
+            if (eStart < end && end <= eEnd) return true;
+        }
+        return false;
+    }
+    
+    /**
+     * This function appends two integers into one.
+     * 
+     * @param a first integer
+     * @param b second integer
+     * @return result of a+b appended.
+     */
+    public int appendIntsTogether (int a, int b) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(a);
+        sb.append(b);
+        String temp = sb.toString();
+        int result = Integer.parseInt(temp);
+    	return result;
+    }
 }
