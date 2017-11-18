@@ -136,12 +136,18 @@ public class EventManager {
 	}
 	public ArrayList<Event> getEventsArrListFromDate (String date) {
 		ArrayList<Event> eventList = new ArrayList<Event> ();
-		if (eventsDS.get(date) != null){
-			eventList = eventsDS.get(date);
+		if (eventsDS == null) {
+			return null;
 		}
 		else {
-			System.out.println("Events do not exist on this day.");
+			if (eventsDS.get(date) != null){
+				eventList = eventsDS.get(date);
+				return eventList;
+			}
+			else {
+				System.out.println("Events do not exist on this day.");
+				return null;
+			}
 		}
-		return eventList;
 	}
 }

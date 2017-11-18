@@ -350,36 +350,38 @@ public class View {
 	public void updateEventsView() {
 		clearEventsView();
 		ArrayList<Event> events = new ArrayList<Event>();
-		events = model.getEventsOfSelectedDay();
+		if (model.getEventsOfSelectedDay() != null) { //if events for selected day do exist perform operations below... else do nothing
+			events = model.getEventsOfSelectedDay();
+			if (events == null) {
+				System.out.println("No events exist for the selected day...");
+			}
+			else {
+				for(int i = 0; i < events.size(); i++) {
+					JLabel jlEventTimes = new JLabel();
+					JLabel jlEventName = new JLabel();
+					String eventName = events.get(i).getTitle();
+					int hhStart = events.get(i).getStartTimeHours();
+					int mmStart = events.get(i).getStartTimeMins();
+					int hhEnd = events.get(i).getEndTimeHours();
+					int mmEnd = events.get(i).getEndTimeMins();
+					
+					String hhStartStr = String.format("%02d", hhStart);
+					String mmStartStr = String.format("%02d", mmStart);
+					String hhEndStr = String.format("%02d", hhEnd);
+					String mmEndStr = String.format("%02d", mmEnd);
+					
+					String time = hhStartStr + ":" + mmStartStr + " - " + hhEndStr + ":" + mmEndStr;
 		
-		if (events == null) {
-			System.out.println("No events exist for the selected day...");
+					System.out.println("This the event name from selected day: " + eventName);
+					jlEventName.setText(eventName);
+					jlEventTimes.setText(time);
+					eventList.add(jlEventTimes);
+					eventList.add(jlEventName);
+				}
+			}
 		}
 		else {
-			for(int i = 0; i < events.size(); i++) {
-				JLabel jlEventTimes = new JLabel();
-				JLabel jlEventName = new JLabel();
-				String eventName = events.get(i).getTitle();
-				int hhStart = events.get(i).getStartTimeHours();
-				int mmStart = events.get(i).getStartTimeMins();
-				int hhEnd = events.get(i).getEndTimeHours();
-				int mmEnd = events.get(i).getEndTimeMins();
-				
-				String hhStartStr = String.format("%02d", hhStart);
-				String mmStartStr = String.format("%02d", mmStart);
-				String hhEndStr = String.format("%02d", hhEnd);
-				String mmEndStr = String.format("%02d", mmEnd);
-		
-				
-				String time = hhStartStr + ":" + mmStartStr + " - " + hhEndStr + ":" + mmEndStr;
-				
-				
-				System.out.println("This the event name from selected day: " + eventName);
-				jlEventName.setText(eventName);
-				jlEventTimes.setText(time);
-				eventList.add(jlEventTimes);
-				eventList.add(jlEventName);
-			}
+			System.out.println("Dont' DO ANYTHING!");
 		}
 	}
 	
