@@ -357,6 +357,8 @@ public class View {
 			}
 			else {
 				for(int i = 0; i < events.size(); i++) {
+					JPanel eventCombo = new JPanel();
+					eventCombo.setLayout(new BorderLayout(0, 0));
 					JLabel jlEventTimes = new JLabel();
 					JLabel jlEventName = new JLabel();
 					String eventName = events.get(i).getTitle();
@@ -370,13 +372,14 @@ public class View {
 					String hhEndStr = String.format("%02d", hhEnd);
 					String mmEndStr = String.format("%02d", mmEnd);
 					
-					String time = hhStartStr + ":" + mmStartStr + " - " + hhEndStr + ":" + mmEndStr;
-		
-					System.out.println("This the event name from selected day: " + eventName);
-					jlEventName.setText(eventName);
+					String time = hhStartStr + ":" + mmStartStr + " - " + hhEndStr + ":" + mmEndStr + "  ";
+					
 					jlEventTimes.setText(time);
-					eventList.add(jlEventTimes);
-					eventList.add(jlEventName);
+					jlEventName.setText(eventName);
+
+					eventCombo.add(jlEventTimes, BorderLayout.WEST);
+					eventCombo.add(jlEventName, BorderLayout.CENTER);
+					eventList.add(eventCombo);
 				}
 			}
 		}
