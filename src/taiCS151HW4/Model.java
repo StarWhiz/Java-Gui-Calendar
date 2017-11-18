@@ -169,6 +169,7 @@ public class Model {
 		Integer hhEnd = Integer.valueOf(textHHend);
 		Integer mmEnd = Integer.valueOf(textMMend);
 		eventManager.createEvent(title, date, hhStart , mmStart, hhEnd, hhEnd);
+		view.updateEventsView();
 	}
 	
 	/**

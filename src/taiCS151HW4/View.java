@@ -163,7 +163,7 @@ public class View {
 		
 		eventList = new JPanel();
 		eventsPanel.add(eventList);
-		eventList.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		eventList.setLayout(new GridLayout(10,1));
 		
 		JPanel eventTitlePanel = new JPanel();
 		mainEventPanel.add(eventTitlePanel, BorderLayout.NORTH);
@@ -209,7 +209,6 @@ public class View {
 		addQuitButtonListener(quitButton);
 		
 		repaintCalendarView();
-		updateEventsView();
 	
 	}
 	
@@ -329,6 +328,7 @@ public class View {
 			});
 			daysPanel.add(aListDayButtons.get(i));
 		}
+		updateEventsView();
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
