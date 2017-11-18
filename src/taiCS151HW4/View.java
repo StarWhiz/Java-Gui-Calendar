@@ -344,9 +344,11 @@ public class View {
 		aListDayButtons.removeAll(aListDayButtons);
 	}
 	
+	/**
+	 * This function updates the event panel
+	 */
 	public void updateEventsView() {
 		clearEventsView();
-		System.out.println("updating events view");
 		ArrayList<Event> events = new ArrayList<Event>();
 		events = model.getEventsOfSelectedDay();
 		
@@ -355,15 +357,35 @@ public class View {
 		}
 		else {
 			for(int i = 0; i < events.size(); i++) {
-				//JTextField tfEventTimes = new JTextField();
-				JLabel tfEventName = new JLabel();
+				JLabel jlEventTimes = new JLabel();
+				JLabel jlEventName = new JLabel();
 				String eventName = events.get(i).getTitle();
+				int hhStart = events.get(i).getStartTimeHours();
+				int mmStart = events.get(i).getStartTimeMins();
+				int hhEnd = events.get(i).getEndTimeHours();
+				int mmEnd = events.get(i).getEndTimeMins();
+				
+				String hhStartStr = String.format("%02d", hhStart);
+				String mmStartStr = String.format("%02d", mmStart);
+				String hhEndStr = String.format("%02d", hhEnd);
+				String mmEndStr = String.format("%02d", mmEnd);
+		
+				
+				String time = hhStartStr + ":" + mmStartStr + " - " + hhEndStr + ":" + mmEndStr;
+				
+				
 				System.out.println("This the event name from selected day: " + eventName);
-				tfEventName.setText(eventName);
-				eventList.add(tfEventName);
+				jlEventName.setText(eventName);
+				jlEventTimes.setText(time);
+				eventList.add(jlEventTimes);
+				eventList.add(jlEventName);
 			}
 		}
 	}
+	
+	/**
+	 * This function clears the event panel
+	 */
 	public void clearEventsView() {
 		eventList.removeAll();
 		eventList.revalidate();

@@ -168,7 +168,7 @@ public class Model {
 		Integer mmStart = Integer.valueOf(textMMstart);
 		Integer hhEnd = Integer.valueOf(textHHend);
 		Integer mmEnd = Integer.valueOf(textMMend);
-		eventManager.createEvent(title, date, hhStart , mmStart, hhEnd, hhEnd);
+		eventManager.createEvent(title, date, hhStart , mmStart, hhEnd, mmEnd);
 		view.updateEventsView();
 	}
 	
