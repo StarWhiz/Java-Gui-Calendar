@@ -43,6 +43,7 @@ public class View {
 	private JLabel lblDate;
 	private JButton prevButton;
 	private JButton nextButton;
+	private JButton createEventButton;
 	
     private JPanel daysPanel;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -178,19 +179,28 @@ public class View {
 		
 		JPanel currentDaySelected = new JPanel();
 		eventCreationPanel.add(currentDaySelected, BorderLayout.CENTER);
+		currentDaySelected.setLayout(new BorderLayout(0, 0));
 		
 		//Current Date to Display Here
 		lblDate = new JLabel("Day");
-		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDate.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
 		currentDaySelected.add(lblDate);
-		lblDate.setText("The currently selected day is: " + model.getMMDDYY());
+		lblDate.setText("The selected day is: " + model.getMMDDYY());
 		
 		JPanel createEventPanel = new JPanel();
 		eventCreationPanel.add(createEventPanel, BorderLayout.EAST);
 		createEventPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnCreateEvent_1 = new JButton("Create Event");
-		createEventPanel.add(btnCreateEvent_1, BorderLayout.NORTH);
+		createEventButton = new JButton("Create Event");
+		createEventPanel.add(createEventButton, BorderLayout.CENTER);
+		
+		JPanel quitPanel = new JPanel();
+		eventCreationPanel.add(quitPanel, BorderLayout.WEST);
+		quitPanel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnQuit_1 = new JButton("Quit");
+		quitPanel.add(btnQuit_1);
 	
 	}
 	
@@ -243,7 +253,7 @@ public class View {
 	 */
 	
 	public void highlightDay() {
-		lblDate.setText("The currently selected day is: " + model.getMMDDYY());
+		lblDate.setText("The selected day is: " + model.getMMDDYY());
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getSelectedDayIndex()).setBorder(BorderFactory.createLineBorder(Color.blue, 5));	
