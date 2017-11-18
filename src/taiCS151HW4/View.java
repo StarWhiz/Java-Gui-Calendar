@@ -44,6 +44,7 @@ public class View {
 	private JButton prevButton;
 	private JButton nextButton;
 	private JButton createEventButton;
+	private JButton quitButton;
 	
     private JPanel daysPanel;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -194,18 +195,21 @@ public class View {
 		
 		createEventButton = new JButton("Create Event");
 		createEventPanel.add(createEventButton, BorderLayout.CENTER);
+		addCreateEventButtonListener(createEventButton);
 		
 		JPanel quitPanel = new JPanel();
 		eventCreationPanel.add(quitPanel, BorderLayout.WEST);
 		quitPanel.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnQuit_1 = new JButton("Quit");
-		quitPanel.add(btnQuit_1);
+		quitButton = new JButton("Quit");
+		quitPanel.add(quitButton);
+		addQuitButtonListener(quitButton);
+		
 	
 	}
 	
 	/**
-	 * Controller Portion of the Code...........................................................
+	 * ***************************** Controller Portion of the Code **************************************************
 	 */
 
 	public void addPrevButtonListener(JButton prevButton) {
@@ -233,19 +237,69 @@ public class View {
 	}
 	
 	/**
-	 * This function prompts the user to create an event.
+	 * This function creates a actionListener for the quit button
+	 * 
 	 */
-	public void addCreateEventButtonListener(JButton btnCreateEvent) {
-		
+	public void addQuitButtonListener (JButton quitButton) {
+		quitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model.saveEventsToFile();
+				System.exit(0);
+			}
+		});
 	}
 	
-	
 	/**
-	 * This function adds a listener to the Save & Quit button.
+	 * This function creates an actionListener for the create event button.
 	 * 
-	 * @param nextButton
 	 */
-	public void addQuitNsaveButtonListener(JButton btnQuit) {
+	public void addCreateEventButtonListener(JButton createEventButton) {
+		createEventButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				eventCreationFrame = new JFrame();
+				eventCreationFrame.setBounds(200, 200, 400, 200);
+				eventCreationFrame.getContentPane().setLayout(null);
+				eventCreationFrame.setVisible(true);
+				
+				JPanel mainPanel = new JPanel();
+				mainPanel.setLayout(new BorderLayout(0, 0));
+				eventCreationFrame.getContentPane().add(mainPanel);
+				
+				JPanel startPanel = new JPanel();
+				
+				JLabel startLabel = new JLabel("Starting Time: ");
+				JTextField startTimeHours = new JTextField("HH");
+				JLabel startColon = new JLabel(":");
+				JTextField startTimeMins = new JTextField("MM");
+				
+				startPanel.add(startLabel);
+				startPanel.add(startTimeHours);
+				startPanel.add(startColon);
+				startPanel.add(startTimeMins);
+				
+				mainPanel.add(startPanel, BorderLayout.CENTER);
+
+				JPanel endPanel = new JPanel();
+				
+				JLabel endLabel = new JLabel("Ending Time: ");
+				JTextField endTimeHours = new JTextField("HH");
+				JLabel endColon = new JLabel(":");
+				JTextField endTimeMins = new JTextField("MM");
+				
+				endPanel.add(endLabel);
+				endPanel.add(endTimeHours);
+				endPanel.add(endColon);
+				endPanel.add(endTimeMins);
+				
+
+				mainPanel.setVisible(true);
+				startPanel.setVisible(true);
+				
+				
+				model.getMMDDYY();
+				
+			}
+		});
 	}
 	
 	/**

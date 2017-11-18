@@ -212,4 +212,7 @@ public class Model {
 		view.repaintCalendarView();
 		view.highlightDay();
 	}
+	public void saveEventsToFile () {
+		eventManager.saveEvents();
+	}
 }
