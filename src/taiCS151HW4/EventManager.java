@@ -2,8 +2,6 @@ package taiCS151HW4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.TreeMap;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

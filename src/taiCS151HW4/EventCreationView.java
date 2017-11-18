@@ -6,14 +6,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.JSplitPane;
 import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
@@ -135,9 +128,9 @@ public class EventCreationView {
 			}	
 		});
 	}
-	
 	/**
-	 * This saves the event created to the model when the createEvent button is pressed
+	 * This saves the event created to the model when the createEvent button is pressed. 
+	 * It will pop up an error message of there is a time conflcit with another event.
 	 * 
 	 * @param btnCreateEvent
 	 */
@@ -175,12 +168,8 @@ public class EventCreationView {
 				else {
 					model.createEvent(eventTitle, date, hhStart, mmStart, hhEnd, mmEnd);
 					frame.setVisible(false);
-					
 				}
 			}	
 		});
 	}
-	
-
-	
 }
