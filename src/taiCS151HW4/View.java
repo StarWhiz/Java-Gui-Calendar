@@ -212,6 +212,11 @@ public class View {
 	 * ***************************** Controller Portion of the Code **************************************************
 	 */
 
+	/**
+	 * This function adds a listener to the previous button.
+	 * 
+	 * @param nextButton
+	 */
 	public void addPrevButtonListener(JButton prevButton) {
 		prevButton.addActionListener(new ActionListener() {
 			@Override
@@ -256,51 +261,7 @@ public class View {
 	public void addCreateEventButtonListener(JButton createEventButton) {
 		createEventButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				EventCreationView newEvent = new EventCreationView(model.getMMDDYY());
-			
-				/*
-				eventCreationFrame = new JFrame();
-				eventCreationFrame.setBounds(200, 200, 400, 200);
-				eventCreationFrame.getContentPane().setLayout(null);
-				eventCreationFrame.setVisible(true);
-				
-				JPanel mainPanel = new JPanel();
-				mainPanel.setLayout(new BorderLayout(0, 0));
-				mainPanel.setVisible(true);
-				eventCreationFrame.getContentPane().add(mainPanel);
-				
-				JPanel startPanel = new JPanel();
-				startPanel.setVisible(true);
-				
-				
-				JLabel startLabel = new JLabel("Starting Time: ");
-				JTextField startTimeHours = new JTextField("HH");
-				JLabel startColon = new JLabel(":");
-				JTextField startTimeMins = new JTextField("MM");
-				
-				startPanel.add(startLabel);
-				startPanel.add(startTimeHours);
-				startPanel.add(startColon);
-				startPanel.add(startTimeMins);
-				eventCreationFrame.getContentPane().add(startPanel);
-				
-				mainPanel.add(startPanel, BorderLayout.CENTER);
-
-				JPanel endPanel = new JPanel();
-				
-				JLabel endLabel = new JLabel("Ending Time: ");
-				JTextField endTimeHours = new JTextField("HH");
-				JLabel endColon = new JLabel(":");
-				JTextField endTimeMins = new JTextField("MM");
-				
-				endPanel.add(endLabel);
-				endPanel.add(endTimeHours);
-				endPanel.add(endColon);
-				endPanel.add(endTimeMins);
-				
-				 */
-	
+				EventCreationView newEvent = new EventCreationView(model);
 			}
 		});
 	}

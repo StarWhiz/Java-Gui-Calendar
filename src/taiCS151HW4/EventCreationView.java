@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 
@@ -24,18 +26,20 @@ public class EventCreationView {
 	private JTextField textHHend;
 	private JTextField textMMend;
 	private JTextField txtEventName;
+	private Model model;
 	
 	/**
 	 * Create the application.
 	 */
-	public EventCreationView(String date) {
-		initialize(date);
+	public EventCreationView(Model model) {
+		this.model = model;
+		initialize(model);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String date) {
+	private void initialize(Model model) {
 		System.out.println("INITIALIZE");
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 250);
@@ -98,11 +102,13 @@ public class EventCreationView {
 		
 		JButton btnCancel = new JButton("Cancel");
 		panel.add(btnCancel);
+		addCancelButtonListener(btnCancel);
 		
 		JButton btnCreateEvent = new JButton("Create Event");
 		panel.add(btnCreateEvent);
+		addCreateEventButtonListener(btnCreateEvent);
 		
-		JLabel lblSelectedDay = new JLabel("Selected Day: " + date + "   ");
+		JLabel lblSelectedDay = new JLabel("Selected Day: " + model.getMMDDYY() + "   ");
 		lblSelectedDay.setHorizontalAlignment(SwingConstants.LEFT);
 		creationPanel.add(lblSelectedDay, BorderLayout.SOUTH);
 		
@@ -112,8 +118,51 @@ public class EventCreationView {
 		creationPanel.add(txtEventName, BorderLayout.CENTER);
 		txtEventName.setColumns(10);
 		frame.setVisible(true);
+			
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		
 	}
+	/**
+	 * This closes the EventCreationWindow when the cancel button is pressed
+	 * 
+	 * @param btnCancel
+	 */
+	public void addCancelButtonListener(JButton btnCancel) {
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				frame.setVisible(false);
+			}	
+		});
+	}
+	
+	/**
+	 * This saves the event created to the model when the createEvent button is pressed
+	 * 
+	 * @param btnCreateEvent
+	 */
+	public void addCreateEventButtonListener(JButton btnCreateEvent) {
+		btnCreateEvent.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String date = model.getMMDDYY();
+				String eventTitle = txtEventName.getText();
+				String hhStart = textHHstart.getText();
+				String mmStart = textMMstart.getText();
+				String hhEnd = textHHend.getText();
+				String mmEnd = textMMend.getText();
+				
+				System.out.println(eventTitle);
+				System.out.println(hhStart);
+				System.out.println(mmStart);
+				System.out.println(hhEnd);
+				System.out.println(mmEnd);
+				System.out.println(date);
+				
+				model.createEvent(eventTitle, date, hhStart, mmStart, hhEnd, mmEnd);
+				frame.setVisible(false);
+			}	
+		});
+	}
+	
 }

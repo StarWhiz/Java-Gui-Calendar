@@ -29,7 +29,7 @@ public class Model {
 		//eventManager.createEvent("Tai's third event", "11/15/17", 17, 30, 23, 59);
 		//eventManager.saveEvents();
 		eventManager.loadEvents();
-		eventManager.displayEventBasedOnDate("11/14/17");
+		eventManager.displayEventBasedOnDate("11/17/17");
 	}
 
 	/**
@@ -163,15 +163,12 @@ public class Model {
 	/**
 	 * This function saves calls eventManger to save events created to a file before quitting the program
 	 */
-	public void saveNquit(String title, String startTime, String endTime) {
-		String date = this.getMMDDYY();
-		startTime.toString();
-		endTime.toString();
-		
-		//eventManager.createEvent(title, date, startTimeHours, startTimeMins, endTimeHours, endTimeMins);
-		
-		eventManager.saveEvents();
-		System.out.println("Program will now save events to file & quit");
+	public void createEvent(String title, String date, String textHHstart, String textMMstart, String textHHend, String textMMend) {
+		Integer hhStart = Integer.valueOf(textHHstart);
+		Integer mmStart = Integer.valueOf(textMMstart);
+		Integer hhEnd = Integer.valueOf(textHHend);
+		Integer mmEnd = Integer.valueOf(textMMend);
+		eventManager.createEvent(title, date, hhStart , mmStart, hhEnd, hhEnd);
 	}
 	
 	/**
