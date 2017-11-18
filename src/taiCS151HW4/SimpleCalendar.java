@@ -9,7 +9,7 @@ package taiCS151HW4;
  * @date Completion Date: 11/18/2017
  *
  */
-public class MainCalendar {
+public class SimpleCalendar {
 
 	public static void main(String[] args) {
 		View appInit = new View ();
