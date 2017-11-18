@@ -212,4 +212,7 @@ public class Model {
 	public void saveEventsToFile () {
 		eventManager.saveEvents();
 	}
+	public ArrayList<Event> getEventsOfSelectedDay () {
+		return eventManager.getEventsArrListFromDate(this.getMMDDYY());
+	}
 }

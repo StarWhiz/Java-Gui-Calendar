@@ -45,6 +45,7 @@ public class View {
 	private JButton nextButton;
 	private JButton createEventButton;
 	private JButton quitButton;
+    private JList eventList;
 	
     private JPanel daysPanel;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -161,7 +162,7 @@ public class View {
 		mainEventPanel.add(eventsPanel, BorderLayout.CENTER);
 		eventsPanel.setLayout(new BorderLayout(0, 0));
 		
-		JList eventList = new JList();
+		eventList = new JList();
 		eventsPanel.add(eventList);
 		
 		JPanel eventTitlePanel = new JPanel();
@@ -329,6 +330,7 @@ public class View {
 		lblMonth.setText(model.getMonth());
 		lblYear.setText(model.getYear());
 		aListDayButtons.get(model.getDay()-1).setBorder(BorderFactory.createLineBorder(Color.blue, 5));
+		updateEventsView();
 	}
 	
 	/**
@@ -339,5 +341,19 @@ public class View {
 		daysPanel.revalidate();
 		daysPanel.repaint();
 		aListDayButtons.removeAll(aListDayButtons);
+	}
+	
+	public void updateEventsView() {
+		ArrayList<Event> events = new ArrayList<Event>();
+		events = model.getEventsOfSelectedDay();
+		for(int i = 0; i < events.size(); i++) {
+			JTextField tfEventTimes = new JTextField();
+			JTextField tfEventName = new JTextField();
+			String eventName = events.get(i).getTitle();
+			System.out.println("This the damn event name from selected day: " + eventName);
+			tfEventName.setText(eventName);
+			//eventList.add(tfEventName);
+		}
+
 	}
 }

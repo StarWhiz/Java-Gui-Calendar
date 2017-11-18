@@ -113,8 +113,16 @@ public class EventManager {
 				System.out.println(eventList.get(i).getTitle()); //displays all eventTitles for that date
 			}
 		}
+
+	}
+	public ArrayList<Event> getEventsArrListFromDate (String date) {
+		ArrayList<Event> eventList = new ArrayList<Event> ();
+		if (eventsDS.get(date) != null){
+			eventList = eventsDS.get(date);
+		}
 		else {
 			System.out.println("Events do not exist on this day.");
 		}
+		return eventList;
 	}
 }
