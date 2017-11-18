@@ -27,6 +27,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
 import javax.swing.SwingConstants;
+import java.awt.FlowLayout;
 
 /**
  * View Portion of the Code......................................................................
@@ -45,7 +46,7 @@ public class View {
 	private JButton nextButton;
 	private JButton createEventButton;
 	private JButton quitButton;
-    private JList eventList;
+    private JPanel eventList;
 	
     private JPanel daysPanel;
 	private ArrayList<JButton> aListDayButtons = new ArrayList<JButton> ();
@@ -160,8 +161,9 @@ public class View {
 		mainEventPanel.add(eventsPanel, BorderLayout.CENTER);
 		eventsPanel.setLayout(new BorderLayout(0, 0));
 		
-		eventList = new JList();
+		eventList = new JPanel();
 		eventsPanel.add(eventList);
+		eventList.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		JPanel eventTitlePanel = new JPanel();
 		mainEventPanel.add(eventTitlePanel, BorderLayout.NORTH);
@@ -343,6 +345,7 @@ public class View {
 	}
 	
 	public void updateEventsView() {
+		clearEventsView();
 		System.out.println("updating events view");
 		ArrayList<Event> events = new ArrayList<Event>();
 		events = model.getEventsOfSelectedDay();
@@ -353,12 +356,17 @@ public class View {
 		else {
 			for(int i = 0; i < events.size(); i++) {
 				//JTextField tfEventTimes = new JTextField();
-				JTextField tfEventName = new JTextField();
+				JLabel tfEventName = new JLabel();
 				String eventName = events.get(i).getTitle();
 				System.out.println("This the event name from selected day: " + eventName);
 				tfEventName.setText(eventName);
 				eventList.add(tfEventName);
 			}
 		}
+	}
+	public void clearEventsView() {
+		eventList.removeAll();
+		eventList.revalidate();
+		eventList.repaint();
 	}
 }
